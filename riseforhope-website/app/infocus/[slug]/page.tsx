@@ -1,3 +1,4 @@
+"use client";
 import { getInFocusBySlug, getAllInFocus } from '../../lib/infocus';
 import ReactMarkdown from 'react-markdown';
 import Header from '../../components/Header';
