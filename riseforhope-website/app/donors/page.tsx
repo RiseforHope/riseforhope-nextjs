@@ -1,0 +1,70 @@
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import Link from 'next/link';
+
+export default function DonorsInfoPage() {
+    return (
+        <main>
+            <Header />
+
+            <div className="max-w-container" style={{ padding: '150px 20px', minHeight: '80vh', maxWidth: '800px' }}>
+
+                {/* Back Link */}
+                <Link href="/" className="item-date" style={{ marginBottom: '20px', display: 'inline-block' }}>
+                    ← Back to Home
+                </Link>
+
+                <h1 className="mission-title" style={{ fontSize: '3rem', marginBottom: '20px' }}>
+                    Information for Donors
+                </h1>
+
+                <p className="mission-text" style={{ fontSize: '1.2rem', color: '#666', marginBottom: '60px' }}>
+                    Transparency is at the heart of our organization. Here you will find our official registration details and financial commitments.
+                </p>
+
+                {/* OFFICIAL DETAILS CARD */}
+                <div style={{ background: '#f9f9f9', padding: '40px', borderRadius: '20px', marginBottom: '40px' }}>
+                    <h3 style={{ fontFamily: 'var(--font-sans)', fontSize: '1.5rem', marginBottom: '20px', fontWeight: 'bold' }}>
+                        Organization Details
+                    </h3>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', fontFamily: 'var(--font-sans)' }}>
+                        <div>
+                            <strong style={{ display: 'block', color: '#888', fontSize: '0.9rem' }}>Official Name</strong>
+                            <span style={{ fontSize: '1.1rem' }}>Rise for Hope</span>
+                        </div>
+                        <div>
+                            <strong style={{ display: 'block', color: '#888', fontSize: '0.9rem' }}>Registered Charity No.</strong>
+                            <span style={{ fontSize: '1.1rem' }}>EIN: 33-4151218</span>
+                        </div>
+                        <div>
+                            <strong style={{ display: 'block', color: '#888', fontSize: '0.9rem' }}>Tax Status</strong>
+                            <span style={{ fontSize: '1.1rem' }}>501(c)(3) Non-Profit</span>
+                        </div>
+                        <div>
+                            <strong style={{ display: 'block', color: '#888', fontSize: '0.9rem' }}>Headquarters</strong>
+                            <span style={{ fontSize: '1.1rem' }}>East Greenville, PA</span>
+                        </div>
+                    </div>
+                </div>
+
+                {/* FINANCIAL COMMITMENT */}
+                <h3 className="mission-title" style={{ fontSize: '1.8rem', marginTop: '60px' }}>Our Financial Promise</h3>
+                <p className="mission-text">
+                    We are committed to ensuring that your donation makes the maximum impact.
+                    <strong> 100% of public donations</strong> go directly to supporting families and funding critical research.
+                    Our administrative costs are covered entirely by private benefactors.
+                </p>
+
+                <div style={{ marginTop: '40px', borderTop: '1px solid #eee', paddingTop: '40px' }}>
+                    <h4 style={{ fontFamily: 'var(--font-sans)', fontWeight: 'bold', marginBottom: '10px' }}>Need tax receipts?</h4>
+                    <p className="mission-text" style={{ fontSize: '1rem' }}>
+                        For inquiries regarding annual tax receipts or large-scale endowments, please contact our finance team at <a href="mailto:finance@riseforhope.org" style={{ color: 'var(--col-gold)', textDecoration: 'underline' }}>finance@riseforhope.org</a>.
+                    </p>
+                </div>
+
+            </div>
+            <Footer />
+        </main>
+    );
+}
