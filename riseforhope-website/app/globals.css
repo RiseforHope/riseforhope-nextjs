@@ -1,0 +1,604 @@
+/* =========================================
+   1. RESET & VARIABLES
+   ========================================= */
+/* At the top of globals.css */
+@font-face {
+  font-family: 'BrandFontItalic';
+  /* Assuming the font is in your public/fonts folder */
+  src: url('/fonts/MyBrandFont-Italic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --col-black: #1D1B1A;
+  --col-gold: #4285f4; /* Primary Blue */
+  --col-white: #ffffff;
+  --col-gray: #f4f4f4;
+  --col-cyan: #5CD6E8;
+  --col-dark-bg: #262626;
+
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+
+  --header-height: 90px;
+  --desktop-padding: 120px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background-color: var(--col-white);
+  color: var(--col-black);
+  -webkit-font-smoothing: antialiased;
+  width: 100%;
+  overflow-x: hidden;
+}
+body.menu-open { overflow: hidden; height: 100vh; }
+a { text-decoration: none; color: inherit; }
+
+/* UTILITY: Max Width Container */
+.max-w-container {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+/* TYPOGRAPHY */
+.mission-title, .hero-title, .pathways-heading, .infocus-title, .footer-title {
+  font-family: var(--font-serif); font-weight: 300;
+}
+.section-label { font-family: var(--font-sans); font-weight: 900; }
+.impact-quote-section p { font-weight: 400; }
+
+/* =========================================
+   2. HEADER SECTION
+   ========================================= */
+.site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background-color: var(--col-white);
+
+  /* DESKTOP LAYOUT: Center the Logo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0 var(--desktop-padding);
+  z-index: 2000;
+  border-bottom: none;
+  transition: background-color 0.3s ease;
+}
+
+.site-logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  z-index: 2010;
+}
+
+.site-logo-text { font-family: var(--font-serif); font-size: 1.75rem; font-weight: 300; line-height: 1; }
+.site-logo-sub { font-family: var(--font-sans); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: #666; margin-top: 5px; }
+
+/* DESKTOP: Float Menu & Donate Button to the Right */
+.menu-toggle {
+  position: absolute;
+  right: var(--desktop-padding); /* Align with content edge (88px) */
+  top: 50%;
+  transform: translateY(-50%);
+
+  background: none; border: none; cursor: pointer; display: flex; align-items: center; padding: 10px 0; z-index: 2010;
+}
+
+.desktop-donate-btn {
+  position: absolute;
+  right: calc(var(--desktop-padding) + 60px); /* Position to the left of the burger menu */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.burger-icon { width: 30px; height: 20px; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
+.burger-icon span { display: block; width: 100%; height: 2px; background-color: var(--col-black); transition: all 0.3s; }
+
+/* MENU OPEN STATE */
+body.menu-open .site-header { background-color: transparent; border-bottom-color: transparent; }
+body.menu-open .site-logo-text { color: var(--col-white); }
+body.menu-open .site-logo-sub { color: rgba(255,255,255,0.7); }
+body.menu-open .burger-icon span { background-color: var(--col-white); }
+body.menu-open .burger-icon span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+body.menu-open .burger-icon span:nth-child(2) { opacity: 0; }
+body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+/* =========================================
+   3. NAVIGATION
+   ========================================= */
+.nav-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--col-black); z-index: 1500; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.5s ease, visibility 0s linear 0.5s; }
+.nav-overlay.active { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity 0.5s ease, visibility 0s linear 0s; }
+.nav-list { list-style: none; text-align: center; }
+.nav-list li { margin: 20px 0; opacity: 0; transform: translateY(20px); transition: 0.4s ease; }
+.nav-overlay.active .nav-list li:nth-child(1) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
+.nav-overlay.active .nav-list li:nth-child(2) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+.nav-overlay.active .nav-list li:nth-child(3) { transition-delay: 0.5s; opacity: 1; transform: translateY(0); }
+.nav-overlay.active .nav-list li:nth-child(4) { transition-delay: 0.6s; opacity: 1; transform: translateY(0); }
+.nav-overlay.active .nav-list li:nth-child(5) { transition-delay: 0.7s; opacity: 1; transform: translateY(0); }
+.nav-link { font-family: var(--font-serif); font-size: 2.5rem; font-weight: 300; color: var(--col-white); transition: color 0.3s; }
+.nav-link:hover { color: var(--col-gold); }
+
+/* =========================================
+   4. HERO SECTION
+   ========================================= */
+.rise-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: calc(var(--header-height) * -1);
+  padding-top: var(--header-height);
+  background-color: transparent;
+  padding-left: var(--desktop-padding);
+  padding-right: var(--desktop-padding);
+}
+
+.hero-bg-layer {
+  position: absolute; top: 0; height: 100%;
+  left: var(--desktop-padding);
+  width: calc(100% - (var(--desktop-padding) * 2));
+  z-index: 0;
+}
+
+.scroll-btn {
+  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+  background: none; border: none; cursor: pointer; z-index: 10;
+  padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.scroll-arrow { width: 20px; height: 20px; border-bottom: 2px solid #fff; border-right: 2px solid #fff; transform: rotate(45deg); }
+.scroll-text { color: #fff; font-family: var(--font-sans); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.2em; font-weight: 700; }
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+.btn-arrow, .btn-yellow-arrow { font-size: 0.8rem; margin-left: 10px; display: inline-block; }
+.btn-yellow-arrow { font-size: 0; width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 7px solid var(--col-black); }
+
+.btn-donate, .btn-cyan, .btn-yellow, .pathway-card {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: linear-gradient(90deg, #FDCCF1 0%, #F8EDFB 100%);
+  color: var(--col-black); padding: 12px 30px; border-radius: 50px;
+  text-transform: uppercase; font-family: var(--font-sans); font-weight: 400;
+  font-size: 0.85rem; letter-spacing: 0.1em; border: none; cursor: pointer; text-decoration: none;
+  transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(253, 204, 241, 0.4);
+}
+
+.btn-donate:hover, .btn-cyan:hover, .btn-yellow:hover, .pathway-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(253, 204, 241, 0.6);
+  filter: brightness(1.02);
+  color: var(--col-black);
+}
+.btn-yellow:hover .btn-yellow-arrow, .pathway-card:hover .card-arrow { border-left-color: var(--col-black); }
+.pathway-card:hover .card-arrow { transform: translateX(5px); }
+
+/* =========================================
+   5. MISSION
+   ========================================= */
+.mission-section { padding: 120px 30px; background-color: var(--col-white); text-align: center; }
+.mission-content { max-width: 800px; margin: 0 auto; width: 100%; }
+.mission-title { font-family: var(--font-serif); font-size: 3.2rem; font-weight: 300; color: var(--col-black); margin-bottom: 40px; line-height: 1.2; }
+.mission-text { font-family: var(--font-sans); font-size: 1.2rem; line-height: 1.6; color: var(--col-black); margin-bottom: 50px; }
+.impact-quote-section { background-color: #f9f9f9; width: 100%; }
+
+/* =========================================
+   6. PATHWAYS
+   ========================================= */
+/* =========================================
+   6. PATHWAYS SECTION
+   ========================================= */
+.pathways-section { padding: 80px 0; background-color: var(--col-white); width: 100%; }
+.section-label { font-family: var(--font-sans); font-weight: 900; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 0.1em; color: var(--col-black); border-bottom: 3px solid var(--col-gold); display: inline-block; padding-bottom: 10px; margin-bottom: 40px; }
+.section-label.label-white { color: var(--col-white); }
+.pathways-heading { font-family: var(--font-serif); font-size: 3rem; font-weight: 300; color: var(--col-black); margin-bottom: 50px; }
+
+.pathways-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; margin-bottom: 60px; }
+
+.pathway-card {
+  padding: 40px 30px;
+  min-height: 180px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  /* UPDATED: Removed Radius */
+  border-radius: 0;
+}
+
+.pathway-card .card-text {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  line-height: 1.2;
+  color: var(--col-black);
+  max-width: 85%;
+  text-transform: none;
+
+  /* UPDATED: Removed Bold */
+  font-weight: 400;
+}
+
+.card-arrow { width: 0; height: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 8px solid var(--col-black); transition: transform 0.3s ease; }
+
+.pathways-links { display: flex; gap: 40px; }
+.text-link { font-family: var(--font-serif); font-size: 1.5rem; color: var(--col-black); border-bottom: 1px solid var(--col-black); padding-bottom: 2px; transition: color 0.3s ease, border-color 0.3s ease; display: inline-flex; align-items: center; gap: 10px; }
+.text-link-arrow { width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 7px solid var(--col-black); transition: border-left-color 0.3s ease; }
+.text-link:hover { color: var(--col-gold); border-color: var(--col-gold); }
+.text-link:hover .text-link-arrow { border-left-color: var(--col-gold); }
+
+/* =========================================
+   7. IN FOCUS SECTION (FIXED LAYOUT & SWAP)
+   ========================================= */
+.infocus-section {
+  padding: 80px 0;
+  background-color: var(--col-white);
+  width: 100%;
+}
+
+/* The Grid Row */
+.infocus-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 50% / 50% split */
+  margin-bottom: 80px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+  position: relative;
+}
+
+.infocus-image {
+  min-height: 450px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index: 1;
+  /* Default: Natural order (Image is 1st in HTML, so it sits Left) */
+}
+
+.infocus-content {
+  background-color: var(--col-white);
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  z-index: 2;
+}
+
+/* --- REVERSED ROW LOGIC (SWAP SIDES) --- */
+/* This moves the Image to the Right side on desktop */
+.infocus-row.reversed .infocus-image {
+  order: 2;
+}
+.infocus-row.reversed .infocus-content {
+  order: 1;
+}
+
+/* --- THE WHITE NOTCH (TRIANGLE) --- */
+.infocus-content::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 25px solid transparent;
+  border-bottom: 25px solid transparent;
+  z-index: 10;
+}
+
+/* 1. STANDARD (Image Left, Content Right) */
+/* Triangle sits on LEFT edge of content, pointing Left */
+.infocus-row:not(.reversed) .infocus-content::before {
+  left: -25px;
+  border-right: 25px solid var(--col-white);
+}
+
+/* 2. REVERSED (Content Left, Image Right) */
+/* Triangle sits on RIGHT edge of content, pointing Right */
+.infocus-row.reversed .infocus-content::before {
+  right: -25px;
+  border-left: 25px solid var(--col-white);
+}
+
+/* Typography */
+.infocus-title {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 20px;
+  color: var(--col-black);
+}
+.infocus-desc {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+/* =========================================
+   8. NEWS & EVENTS (RESTORED GRID)
+   ========================================= */
+.news-events-section {
+  padding: 80px 0;
+  background-color: var(--col-white);
+  width: 100%;
+}
+
+/* Internal Grid Wrapper Style */
+.news-events-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.featured-image-container {
+  width: 100%;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  margin-bottom: 30px;
+  background-color: #eee; /* Fallback */
+}
+
+.notch-up { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-bottom: 20px solid var(--col-white); }
+.news-list-item, .events-list-item { margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+.news-list-item:last-child, .events-list-item:last-child { border-bottom: none; }
+.item-date { font-family: var(--font-sans); font-weight: 900; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: #555; margin-bottom: 5px; display: block; }
+.item-headline { font-family: var(--font-serif); font-size: 1.4rem; color: var(--col-black); font-weight: 400; border-bottom: 1px solid var(--col-black); padding-bottom: 2px; display: inline; line-height: 1.4; transition: color 0.3s ease; }
+.item-headline:hover { color: #555; border-color: #555; }
+.item-excerpt, .item-location { font-family: var(--font-sans); font-size: 1rem; color: #666; margin-top: 10px; line-height: 1.6; }
+
+/* =========================================
+   9. SOCIAL MEDIA SECTION
+   ========================================= */
+.social-section {
+  width: 100%; /* Background goes edge-to-edge */
+  background-color: #f9f9f9;
+  color: var(--col-black);
+
+  /* PADDING HANDLES THE ALIGNMENT */
+  /* Top/Bottom: 80px. Left/Right: 120px (Matches Hero) */
+  padding: 80px var(--desktop-padding);
+
+  box-sizing: border-box; /* Keeps padding inside the width */
+}
+
+/* ... keep internal social classes (.insta-header, .insta-grid, etc) the same ... */
+.insta-header { display: flex; align-items: center; margin-bottom: 40px; }
+.insta-avatar { width: 60px; height: 60px; border-radius: 50%; background-color: #555; background-image: url('https://res.cloudinary.com/dvexnl19a/image/upload/v1764050764/IMG_0979_kddbxw.jpg'); background-size: cover; margin-right: 20px; border: 2px solid var(--col-white); }
+.insta-meta { font-family: var(--font-sans); }
+.insta-user { display: block; font-weight: 900; font-size: 1.1rem; }
+.insta-bio { font-size: 0.9rem; color: #555; }
+.insta-grid { display: flex; flex-wrap: wrap; margin: 0 -10px; }
+.insta-item { position: relative; display: block; width: 25%; padding: 10px; box-sizing: border-box; }
+.insta-image-container { width: 100%; aspect-ratio: 1 / 1; background-size: cover; background-position: center; position: relative; }
+.insta-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); display: flex; justify-content: center; align-items: center; transition: background 0.3s ease; opacity: 0; }
+.insta-image-container:hover .insta-overlay { opacity: 1; background: rgba(0,0,0,0.4); }
+.play-icon { width: 0; height: 0; border-top: 15px solid transparent; border-bottom: 15px solid transparent; border-left: 25px solid var(--col-white); }
+
+
+/* =========================================
+   10. FOOTER SECTION
+   ========================================= */
+.site-footer {
+  width: 100%; /* Background goes edge-to-edge */
+  background-color: var(--col-black);
+  color: var(--col-white);
+  text-align: center;
+  font-family: var(--font-serif);
+
+  /* PADDING HANDLES THE ALIGNMENT */
+  /* Top: 100px. Left/Right: 120px (Matches Hero). Bottom: 40px */
+  padding: 100px var(--desktop-padding) 40px;
+
+  box-sizing: border-box;
+}
+
+/* ... keep internal footer classes (.footer-logo-area, etc) the same ... */
+.footer-logo-area { margin-bottom: 40px; }
+.footer-title { font-size: 2.5rem; font-weight: 300; letter-spacing: 0.05em; margin-bottom: 5px; }
+.footer-subtitle { font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.9rem; }
+.footer-address { font-size: 1.1rem; margin-bottom: 50px; color: #ccc; }
+.footer-links { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 80px; font-size: 1.1rem; }
+.footer-links a { border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 2px; transition: border-color 0.3s ease; }
+.footer-links a:hover { border-color: var(--col-gold); }
+.footer-links li.separator { color: #555; }
+.footer-bottom { display: flex; justify-content: space-between; border-top: 1px solid #333; padding-top: 30px; font-size: 0.85rem; color: #888; font-family: var(--font-sans); }
+
+/* =========================================
+   MEDIA QUERIES (RESPONSIVE)
+   ========================================= */
+
+@media (max-width: 1200px) {
+  .pathways-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+}
+
+@media (max-width: 1024px) {
+  :root { --desktop-padding: 40px; }
+  .hero-bg-layer { left: var(--desktop-padding); width: calc(100% - (var(--desktop-padding) * 2)); }
+
+  .infocus-row { grid-template-columns: 1fr; box-shadow: none; gap: 0; margin-bottom: 60px; }
+  .infocus-image { min-height: 350px; }
+  /* Ensure image is on top for tablet */
+  .infocus-row.reversed .infocus-image { order: -1; }
+  .infocus-row.reversed .infocus-content { order: 0; }
+
+  .infocus-content::before { display: none; }
+  .infocus-content { padding: 40px 0; }
+
+  .news-events-grid { grid-template-columns: 1fr; gap: 60px; }
+  .insta-item { width: 50%; }
+}
+
+/* --- MOBILE FIXES --- */
+@media (max-width: 768px) {
+  :root { --header-height: 70px; }
+
+  /* 1. HEADER: Keep Logo Centered */
+  .site-header {
+    padding: 0 20px;
+    justify-content: center; /* Force Center */
+  }
+
+  .site-logo {
+    text-align: center;
+    align-items: center;
+  }
+
+  /* 2. MENU: Position Absolute Right (Like Desktop but tighter margin) */
+  .menu-toggle {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .desktop-donate-btn { display: none; }
+  .menu-label { display: none; }
+
+  .site-logo-text { font-size: 1.4rem; }
+  .nav-link { font-size: 1.8rem; }
+
+  /* Gutter Consistency */
+  .max-w-container, .pathways-section, .infocus-section, .news-events-section, .mission-section {
+    padding-left: 20px !important; padding-right: 20px !important;
+    padding-top: 60px; padding-bottom: 60px;
+  }
+
+  /* Full Bleed Footer & Social */
+  .site-footer, .social-section {
+    width: 100% !important; max-width: 100% !important; margin: 0 !important;
+    padding-left: 20px; padding-right: 20px; border-radius: 0;
+  }
+
+  .rise-hero { height: auto; min-height: 500px; padding-left: 0; padding-right: 0; }
+  .hero-bg-layer { left: 0 !important; width: 100% !important; }
+
+  .pathways-grid { grid-template-columns: 1fr; }
+  .pathways-links { flex-direction: column; gap: 20px; align-items: flex-start; }
+  .insta-item { width: 100%; margin-bottom: 20px; }
+  .footer-links { flex-direction: column; gap: 15px; }
+  .footer-links li.separator { display: none; }
+  .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+  .scroll-btn { bottom: 20px; }
+}
+
+/* =========================================
+   11. LIGHTBOX / MODAL STYLES
+   ========================================= */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(29, 27, 26, 0.6); backdrop-filter: blur(8px); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; animation: fadeIn 0.3s ease-out forwards; }
+.modal-content { background: var(--col-white); width: 100%; max-width: 550px; border-radius: 20px; padding: 40px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.2); animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; font-family: var(--font-sans); max-height: 90vh; overflow-y: auto; }
+.form-input, .form-textarea, select.form-input { width: 100%; padding: 15px 20px; border-radius: 12px; border: 1px solid #eee; background: #f9f9f9; font-family: var(--font-sans) !important; font-size: 1rem; color: var(--col-black); margin-bottom: 20px; transition: all 0.3s ease; outline: none; -webkit-appearance: none; }
+.form-input:focus, .form-textarea:focus { background: #fff; border-color: var(--col-gold); box-shadow: 0 0 0 4px rgba(66, 133, 244, 0.1); }
+.close-btn { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 1.5rem; color: #999; cursor: pointer; }
+.close-btn:hover { color: var(--col-black); }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(30px) scale(0.95); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+
+/* =========================================
+   12. SOFT QUOTE COMPONENT (FIXED PADDING)
+   ========================================= */
+.soft-quote-section {
+  padding: 100px 0;
+  background-color: transparent;
+  width: 100%;
+}
+
+.soft-quote-card {
+  position: relative;
+  max-width: 900px; /* Constrain width so lines don't get too long */
+  margin: 0 auto;
+  /* Safe padding on sides so quotes don't touch screen edges */
+  padding: 0 30px;
+  text-align: center;
+}
+
+.quote-mark {
+  font-family: var(--font-serif);
+  font-size: 8rem;
+  line-height: 0;
+  color: #FDCCF1; /* Pink Brand Color */
+  position: absolute;
+  opacity: 1;
+}
+
+/* Position: Top Left (Inside the padding) */
+.quote-open {
+  top: -40px;
+  left: 20px; /* Aligned safely inside */
+  transform: none; /* Remove centering transforms */
+}
+
+/* Position: Bottom Right (Inside the padding) */
+.quote-close {
+  bottom: -40px;
+  right: 20px; /* Aligned safely inside */
+  transform: none;
+}
+
+.soft-quote-text {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 3.2rem;
+  line-height: 1.3;
+  color: var(--col-black);
+  position: relative;
+  z-index: 2;
+  margin: 0;
+}
+
+.soft-quote-divider, .soft-quote-author {
+  display: none;
+}
+
+/* RESPONSIVE ADJUSTMENTS */
+@media (max-width: 1024px) {
+  .soft-quote-text { font-size: 2.5rem; }
+  .quote-mark { font-size: 6rem; }
+  .quote-open { top: -30px; left: 0; }
+  .quote-close { bottom: -30px; right: 0; }
+}
+
+@media (max-width: 768px) {
+  .soft-quote-section { padding: 60px 0; }
+
+  /* Add vertical padding to card so quotes don't overlap text on small screens */
+  .soft-quote-card { padding: 40px 20px; }
+
+  .soft-quote-text {
+    font-size: 1.8rem;
+    line-height: 1.5;
+  }
+
+  .quote-mark { font-size: 4rem; }
+
+  /* FIX: Push quotes inward (20px) so they don't touch screen edges */
+  .quote-open {
+    top: -10px;
+    left: 20px;
+  }
+
+  .quote-close {
+    bottom: -10px;
+    right: 20px;
+  }
+}
