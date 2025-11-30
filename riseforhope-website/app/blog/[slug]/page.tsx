@@ -2,7 +2,7 @@ import { getPostBySlug, getAllPosts } from '../../lib/blog';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
-import BlogContent from '../../components/BlogContent';
+import BlogContent from '../../components/BlogContent'; 
 
 export async function generateStaticParams() {
     const posts = getAllPosts();
