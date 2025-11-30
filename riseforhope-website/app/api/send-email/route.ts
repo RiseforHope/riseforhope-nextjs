@@ -9,8 +9,8 @@ export async function POST(request: Request) {
     const { name, email, message } = body;
 
     const data = await resend.emails.send({
-      from: 'onboarding@resend.dev', // Safe Mode (Always works)
-      to: 'bladimir@brinl.com', // <--- CHANGE THIS to your new account email
+      from: 'info@riseforhope.org',
+      to: 'bladimir.garcia@brinl.com', // <--- UPDATED: Must match your Resend account email
       replyTo: email,
       subject: `New Contact from ${name}`,
       html: `
@@ -30,6 +30,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true, data });
   } catch (error: any) {
+    console.error('Email error:', error);
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
