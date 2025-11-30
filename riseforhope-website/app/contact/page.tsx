@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -15,7 +14,7 @@ export default function ContactPage() {
         setStatus('Sending...');
 
         const formData = new FormData(e.currentTarget);
-        const data = {
+        const payload = {
             name: formData.get('name'),
             email: formData.get('email'),
             message: formData.get('message'),
@@ -25,92 +24,52 @@ export default function ContactPage() {
             const response = await fetch('/api/send-email', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
+                body: JSON.stringify(payload),
             });
 
-            if (response.ok) {
-                setStatus('Thank you! Your message has been sent.');
-                (e.target as HTMLFormElement).reset();
+            const result = await response.json();
+
+            if (!result.success) {
+                // ALERT THE ERROR DIRECTLY TO THE USER
+                alert(`❌ ERROR: ${JSON.stringify(result.error)}`);
+                setStatus('Failed. Check the popup alert for details.');
             } else {
-                setStatus('Error sending message. Please try again.');
+                alert('✅ SUCCESS: Email sent!');
+                setStatus('Message sent successfully.');
+                (e.target as HTMLFormElement).reset();
             }
-        } catch (error) {
-            console.error(error);
-            setStatus('Error sending message. Please try again.');
+        } catch (error: any) {
+            alert(`❌ NETWORK ERROR: ${error.message}`);
+            setStatus('Network error occurred.');
         }
         setIsSubmitting(false);
     }
 
-    const inputStyle = {
-        width: '100%',
-        padding: '12px',
-        borderRadius: '8px',
-        border: '1px solid #ddd',
-        marginBottom: '20px',
-        fontFamily: 'var(--font-sans)',
-        fontSize: '1rem'
-    };
-
-    const labelStyle = {
-        display: 'block',
-        marginBottom: '8px',
-        fontWeight: 'bold',
-        fontFamily: 'var(--font-sans)'
-    };
-
     return (
         <main>
             <Header />
-            <div className="max-w-container" style={{ padding: '150px 20px 80px', minHeight: '80vh' }}>
-                <div style={{ maxWidth: '700px', margin: '0 auto' }}>
-                    <div style={{ marginBottom: '40px' }}>
-                        <Link href="/" className="item-date" style={{ display: 'inline-block' }}>
-                            ← Back to Home
-                        </Link>
+            <div className="max-w-container" style={{ padding: '150px 20px 80px', maxWidth: '700px', margin: '0 auto' }}>
+                <Link href="/" style={{ display: 'block', marginBottom: '40px' }}>← Back to Home</Link>
+                <h1 className="mission-title" style={{ textAlign: 'center', marginBottom: '20px' }}>Contact Us</h1>
+                
+                <form onSubmit={handleSubmit} style={{ background: '#fff', padding: '20px', borderRadius: '15px', border: '1px solid #eee' }}>
+                    <div style={{ marginBottom: '15px' }}>
+                        <label style={{ display: 'block', fontWeight: 'bold' }}>Name</label>
+                        <input name="name" required style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '5px' }} />
                     </div>
-
-                    <h1 className="mission-title" style={{ textAlign: 'center', marginBottom: '20px' }}>
-                        Contact Us
-                    </h1>
-
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', marginBottom: '60px' }}>
-                        <div style={{ textAlign: 'center', padding: '30px', background: '#f9f9f9', borderRadius: '15px' }}>
-                            <h3 style={{ fontFamily: 'var(--font-sans)', fontWeight: 'bold', marginBottom: '10px' }}>General Inquiries</h3>
-                            <p style={{ fontFamily: 'var(--font-sans)', color: '#666' }}>hello@riseforhope.org</p>
-                        </div>
-                        <div style={{ textAlign: 'center', padding: '30px', background: '#f9f9f9', borderRadius: '15px' }}>
-                            <h3 style={{ fontFamily: 'var(--font-sans)', fontWeight: 'bold', marginBottom: '10px' }}>Phone</h3>
-                            <p style={{ fontFamily: 'var(--font-sans)', color: '#666' }}>+1 (555) 123-4567</p>
-                        </div>
+                    <div style={{ marginBottom: '15px' }}>
+                        <label style={{ display: 'block', fontWeight: 'bold' }}>Email</label>
+                        <input name="email" type="email" required style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '5px' }} />
                     </div>
-
-                    <form onSubmit={handleSubmit} style={{ background: '#fff', padding: '20px', borderRadius: '15px' }}>
-                        <div>
-                            <label htmlFor="name" style={labelStyle}>Name</label>
-                            <input type="text" name="name" id="name" required placeholder="Your Name" style={inputStyle} />
-                        </div>
-
-                        <div>
-                            <label htmlFor="email" style={labelStyle}>Email</label>
-                            <input type="email" name="email" id="email" required placeholder="you@example.com" style={inputStyle} />
-                        </div>
-
-                        <div>
-                            <label htmlFor="message" style={labelStyle}>Message</label>
-                            <textarea name="message" id="message" rows={5} required placeholder="How can we help?" className="form-textarea" style={{ ...inputStyle, minHeight: '120px' }}></textarea>
-                        </div>
-
-                        <button type="submit" disabled={isSubmitting} className="btn-donate" style={{ width: '100%', fontSize: '1rem', border: 'none', opacity: isSubmitting ? 0.7 : 1 }}>
-                            {isSubmitting ? 'Sending...' : 'Send Message'}
-                        </button>
-
-                        {status && (
-                            <p style={{ marginTop: '20px', textAlign: 'center', color: status.includes('Error') ? 'red' : 'green', fontWeight: 'bold' }}>
-                                {status}
-                            </p>
-                        )}
-                    </form>
-                </div>
+                    <div style={{ marginBottom: '15px' }}>
+                        <label style={{ display: 'block', fontWeight: 'bold' }}>Message</label>
+                        <textarea name="message" rows={5} required style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '5px' }}></textarea>
+                    </div>
+                    <button type="submit" disabled={isSubmitting} className="btn-donate" style={{ width: '100%', border: 'none', cursor: 'pointer' }}>
+                        {isSubmitting ? 'Sending...' : 'Send Message'}
+                    </button>
+                    <p style={{ textAlign: 'center', marginTop: '15px', fontWeight: 'bold' }}>{status}</p>
+                </form>
             </div>
             <Footer />
         </main>
