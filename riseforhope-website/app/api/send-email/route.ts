@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     // 2. Send Email
     const data = await resend.emails.send({
       from: 'info@riseforhope.org', // Your verified domain
-      to: 'bladimirgarcia@gmail.com', // Your personal email
+      to: 'bladimir@kogno.org', // Your personal email
       subject: `New Message from ${name}`,
       replyTo: email,
       html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong> ${message}</p>`,
