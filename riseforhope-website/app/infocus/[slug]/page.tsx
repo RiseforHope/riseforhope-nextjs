@@ -2,7 +2,7 @@ import { getInFocusBySlug, getAllInFocus } from '../../lib/infocus';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
-import InFocusContent from '../../components/InFocusContent'; 
+import InFocusContent from '../../components/InFocusContent';
 
 export async function generateStaticParams() {
     const posts = getAllInFocus();
