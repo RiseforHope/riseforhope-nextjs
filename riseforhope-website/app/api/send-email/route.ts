@@ -4,16 +4,16 @@ import { Resend } from 'resend';
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
-  try {
-    const body = await request.json();
-    const { name, email, message } = body;
+    try {
+        const body = await request.json();
+        const { name, email, message } = body;
 
-    const data = await resend.emails.send({
-      from: 'info@riseforhope.org',
-      to: 'bladimir.garcia@brinl.com', // <--- UPDATED: Must match your Resend account email
-      replyTo: email,
-      subject: `New Contact from ${name}`,
-      html: `
+        const data = await resend.emails.send({
+            from: 'info@riseforhope.org', // Or 'info@riseforhope.org' if verified
+            to: 'bladimir.garcia@brinl.com', // Must match your Resend account email
+            replyTo: email,
+            subject: `New Contact from ${name}`,
+            html: `
         <h2>New Contact Form Submission</h2>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
@@ -22,15 +22,14 @@ export async function POST(request: Request) {
           ${message}
         </blockquote>
       `,
-    });
+        });
 
-    if (data.error) {
-      return NextResponse.json({ success: false, error: data.error }, { status: 400 });
+        if (data.error) {
+            return NextResponse.json({ success: false, error: data.error }, { status: 400 });
+        }
+
+        return NextResponse.json({ success: true, data });
+    } catch (error: any) {
+        return NextResponse.json({ success: false, error: error.message }, { status: 500 });
     }
-
-    return NextResponse.json({ success: true, data });
-  } catch (error: any) {
-    console.error('Email error:', error);
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
-  }
 }
