@@ -2,7 +2,7 @@ import { getInFocusBySlug, getAllInFocus } from '../../lib/infocus';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
-import InFocusContent from '../../components/InFocusContent'; // Import the new component
+import InFocusContent from '../../components/InFocusContent'; // We import the client component
 
 export async function generateStaticParams() {
     const posts = getAllInFocus();
@@ -20,15 +20,12 @@ export default async function InFocusPage({ params }: { params: Promise<{ slug: 
             <Header />
             <article className="max-w-container" style={{ padding: '150px 20px 80px', maxWidth: '800px' }}>
 
-                {/* Back Link */}
                 <Link href="/#infocus" className="item-date" style={{ marginBottom: '20px', display: 'inline-block' }}>
                     ← Back to Home
                 </Link>
 
-                {/* Main Title */}
                 <h1 className="mission-title" style={{ fontSize: '3rem', marginBottom: '10px' }}>{post.title}</h1>
 
-                {/* MAIN IMAGE WITH CAPTION */}
                 <figure style={{ margin: '40px 0' }}>
                     <div
                         style={{
@@ -40,20 +37,13 @@ export default async function InFocusPage({ params }: { params: Promise<{ slug: 
                         }}
                     />
                     {post.imageCaption && (
-                        <figcaption style={{
-                            textAlign: 'center',
-                            color: '#888',
-                            fontSize: '0.9rem',
-                            marginTop: '10px',
-                            fontStyle: 'italic',
-                            fontFamily: 'var(--font-sans)'
-                        }}>
+                        <figcaption style={{ textAlign: 'center', color: '#888', fontSize: '0.9rem', marginTop: '10px', fontStyle: 'italic', fontFamily: 'var(--font-sans)' }}>
                             {post.imageCaption}
                         </figcaption>
                     )}
                 </figure>
 
-                {/* ARTICLE CONTENT - Moved to Client Component */}
+                {/* This Component handles the markdown rendering */}
                 <InFocusContent content={post.content} />
 
             </article>
