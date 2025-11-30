@@ -10,8 +10,8 @@ export async function POST(request: Request) {
 
         // 1. Send the email using Resend
         const data = await resend.emails.send({
-            from: 'onboarding@resend.dev', // Use this until you verify your custom domain on Resend
-            to: 'your-email@gmail.com',    // CHANGE THIS to where you want to receive the alerts
+            from: 'info@riseforhope.org', // Use this until you verify your custom domain on Resend
+            to: 'bladimir@riseforhope.org',    // CHANGE THIS to where you want to receive the alerts
             subject: `New Message from ${name}`,
             html: `
         <h2>New Contact Form Submission</h2>
