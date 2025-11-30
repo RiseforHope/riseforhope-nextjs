@@ -9,9 +9,9 @@ export async function POST(request: Request) {
     const { name, email, message } = body;
 
     const data = await resend.emails.send({
-      from: 'info@riseforhope.org', // This MUST stay as your verified domain
-      to: 'bladimir@riseforhope.org',   // <--- CHANGE THIS EMAIL to where you want to receive messages
-      replyTo: email,               // This lets you hit "Reply" to answer the visitor
+      from: 'info@riseforhope.org', // Your verified domain (Must stay this way)
+      to: 'bladimir@riseforhope.org',   // <--- THE DESTINATION: Change this to where you want to receive mail
+      replyTo: email,
       subject: `New Contact from ${name}`,
       html: `
         <h2>New Contact Form Submission</h2>
