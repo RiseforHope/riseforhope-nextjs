@@ -2,7 +2,7 @@ import { getInFocusBySlug, getAllInFocus } from '../../lib/infocus';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
-import InFocusContent from '../../components/InFocusContent'; // We import the client component
+import InFocusContent from '../../components/InFocusContent'; 
 
 export async function generateStaticParams() {
     const posts = getAllInFocus();
@@ -19,13 +19,10 @@ export default async function InFocusPage({ params }: { params: Promise<{ slug: 
         <main>
             <Header />
             <article className="max-w-container" style={{ padding: '150px 20px 80px', maxWidth: '800px' }}>
-
                 <Link href="/#infocus" className="item-date" style={{ marginBottom: '20px', display: 'inline-block' }}>
                     ← Back to Home
                 </Link>
-
                 <h1 className="mission-title" style={{ fontSize: '3rem', marginBottom: '10px' }}>{post.title}</h1>
-
                 <figure style={{ margin: '40px 0' }}>
                     <div
                         style={{
@@ -42,10 +39,7 @@ export default async function InFocusPage({ params }: { params: Promise<{ slug: 
                         </figcaption>
                     )}
                 </figure>
-
-                {/* This Component handles the markdown rendering */}
                 <InFocusContent content={post.content} />
-
             </article>
             <Footer />
         </main>

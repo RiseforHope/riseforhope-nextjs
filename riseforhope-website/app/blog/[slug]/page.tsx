@@ -2,7 +2,7 @@ import { getPostBySlug, getAllPosts } from '../../lib/blog';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
-import BlogContent from '../../components/BlogContent'; // Import the new client component
+import BlogContent from '../../components/BlogContent'; 
 
 export async function generateStaticParams() {
     const posts = getAllPosts();
@@ -18,19 +18,14 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
     return (
         <main>
             <Header />
-
             <article className="max-w-container" style={{ padding: '150px 20px 80px', maxWidth: '800px' }}>
-
-                {/* FIXED: Wrapper div for uniform spacing */}
                 <div style={{ marginBottom: '40px' }}>
                     <Link href="/" className="item-date" style={{ display: 'inline-block' }}>
                         ← Back to Home
                     </Link>
                 </div>
-
                 <h1 className="mission-title" style={{ fontSize: '3rem', marginBottom: '10px' }}>{post.title}</h1>
                 <span className="item-date" style={{ fontSize: '1rem', color: '#888' }}>{post.date}</span>
-
                 {post.image && (
                     <div
                         style={{
@@ -41,12 +36,8 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                         }}
                     />
                 )}
-
-                {/* Content moved to Client Component */}
                 <BlogContent content={post.content} />
-
             </article>
-
             <Footer />
         </main>
     );
