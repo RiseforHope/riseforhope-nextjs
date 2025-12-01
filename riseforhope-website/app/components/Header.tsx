@@ -37,7 +37,7 @@ export default function Header() {
                     <img
                         src={isOpen ? WHITE_LOGO : MAIN_LOGO}
                         alt="Rise For Hope Logo"
-                        style={{ height: '50px', width: 'auto', objectFit: 'contain' }}
+                        style={{ height: '40px', width: 'auto', objectFit: 'contain' }}
                     />
                 </Link>
 
