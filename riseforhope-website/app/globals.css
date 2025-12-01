@@ -21,6 +21,7 @@
   --font-sans: var(--font-sans);
 
   --header-height: 90px;
+  /* Note: The hero now uses container logic, so this var is mostly for the header positioning */
   --desktop-padding: 120px;
 }
 
@@ -76,7 +77,12 @@ body.menu-open .burger-icon span:nth-child(1) { transform: translateY(9px) rotat
 body.menu-open .burger-icon span:nth-child(2) { opacity: 0; }
 body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
-.nav-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--col-black); z-index: 1500; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.5s ease; }
+.nav-overlay {
+  position: fixed; top: 0; left: 0; width: 100%;
+  height: 100vh; /* Fallback */
+  height: 100dvh; /* FIX: Covers entire screen on mobile browsers */
+  background-color: var(--col-black); z-index: 1500; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.5s ease;
+}
 .nav-overlay.active { opacity: 1; visibility: visible; pointer-events: auto; }
 .nav-list { list-style: none; text-align: center; }
 .nav-list li { margin: 20px 0; opacity: 0; transform: translateY(20px); transition: 0.4s ease; }
@@ -88,13 +94,38 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
 .nav-link { font-family: var(--font-serif); font-size: 2.5rem; font-weight: 300; color: var(--col-white); transition: color 0.3s; }
 .nav-link:hover { color: var(--col-gold); }
 
+/* --- HERO SECTION MODIFIED FOR ALIGNMENT --- */
 .rise-hero {
-  position: relative; width: 100%; height: 100vh; min-height: 700px;
-  display: flex; align-items: center; justify-content: center; overflow: hidden;
-  margin-top: calc(var(--header-height) * -1); padding-top: var(--header-height);
-  background-color: transparent; padding-left: var(--desktop-padding); padding-right: var(--desktop-padding);
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: calc(var(--header-height) * -1);
+  padding-top: var(--header-height);
+  background-color: transparent;
+
+  /* FIX: Align with max-w-container logic instead of variable padding */
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 30px;
+  padding-right: 30px;
 }
-.hero-bg-layer { position: absolute; top: 0; height: 100%; left: var(--desktop-padding); width: calc(100% - (var(--desktop-padding) * 2)); z-index: 0; }
+
+.hero-bg-layer {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  /* FIX: Layer now fills the container padding area */
+  left: 30px;
+  width: calc(100% - 60px);
+  z-index: 0;
+}
+
 .scroll-btn { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); background: none; border: none; cursor: pointer; z-index: 10; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
 .scroll-arrow { width: 20px; height: 20px; border-bottom: 2px solid #fff; border-right: 2px solid #fff; transform: rotate(45deg); animation: bounce 2s infinite ease-in-out; }
 .scroll-text { color: #fff; font-family: var(--font-sans); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.2em; font-weight: 700; }
@@ -207,18 +238,18 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
 /* --- MOBILE FIXES --- */
 @media (max-width: 768px) {
   :root { --header-height: 70px; }
-  .site-header { padding: 0 20px; justify-content: center; }
+  .site-header { padding: 0 10px; justify-content: center; } /* Reduced Header padding */
   .site-logo { text-align: center; align-items: center; }
-  .menu-toggle { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); }
+  .menu-toggle { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); } /* Adjusted toggle position */
   .desktop-donate-btn, .menu-label { display: none; }
   .site-logo-text { font-size: 1.4rem; }
   .nav-link { font-size: 1.8rem; }
 
-  /* Gutter Consistency (FIX: Reduced padding to 15px) */
+  /* Gutter Consistency (FIX: Reduced padding to 10px as requested) */
   .max-w-container, .pathways-section, .infocus-section, .news-events-section, .mission-section {
-    padding-left: 15px !important; padding-right: 15px !important; padding-top: 60px; padding-bottom: 60px;
+    padding-left: 10px !important; padding-right: 10px !important; padding-top: 60px; padding-bottom: 60px;
   }
-  .site-footer, .social-section { width: 100% !important; max-width: 100% !important; margin: 0 !important; padding-left: 15px; padding-right: 15px; border-radius: 0; }
+  .site-footer, .social-section { width: 100% !important; max-width: 100% !important; margin: 0 !important; padding-left: 10px; padding-right: 10px; border-radius: 0; }
 
   /* FIX: Mobile Hero Height - Uses 100svh */
   .rise-hero { height: 100svh; min-height: 100svh; padding-left: 0; padding-right: 0; }
@@ -229,8 +260,16 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
   .pathway-card { padding: 25px 15px; }
   .pathways-links { flex-direction: column; gap: 20px; align-items: flex-start; }
   .insta-item { width: 100%; margin-bottom: 20px; }
-  .footer-links { flex-direction: column; gap: 15px; }
-  .footer-links li.separator { display: none; }
+
+  /* FIX: Footer links aligned horizontal */
+  .footer-links {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+  .footer-links li.separator { display: inline-block; } /* Show separator if needed, or hide if preferred */
+
   .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
   .scroll-btn { bottom: 20px; }
 }
