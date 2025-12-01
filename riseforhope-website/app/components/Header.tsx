@@ -5,7 +5,6 @@ import Link from 'next/link';
 import DonateButton from './DonateButton';
 
 // 1. DEFINE LOGOS
-// Paste your MAIN (Black/Colored) logo url here:
 const MAIN_LOGO = 'https://res.cloudinary.com/dvexnl19a/image/upload/v1764379593/logo-tree-r4h_2x_f1gixs.png';
 const WHITE_LOGO = 'https://res.cloudinary.com/dvexnl19a/image/upload/v1764380694/logo-tree-white-r4h_2x_rep1gq.png';
 
@@ -35,7 +34,6 @@ export default function Header() {
         <>
             <header className={`site-header ${isOpen ? 'active' : ''}`}>
                 <Link href="/" className="site-logo">
-                    {/* UPDATED: Conditional Logo based on 'isOpen' state */}
                     <img
                         src={isOpen ? WHITE_LOGO : MAIN_LOGO}
                         alt="Rise For Hope Logo"
@@ -46,7 +44,10 @@ export default function Header() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
 
                     <div className="desktop-donate-btn">
-                        <DonateButton label="Donate ❤" />
+                        {/* UPDATED: Wrapped in Link to /donate */}
+                        <Link href="/donate" style={{ textDecoration: 'none' }}>
+                            <DonateButton label="Donate ❤" />
+                        </Link>
                     </div>
 
                     <button
@@ -78,7 +79,10 @@ export default function Header() {
                     ))}
 
                     <li style={{ marginTop: '20px', opacity: 1, transform: 'translateY(0)' }}>
-                        <DonateButton className="nav-donate-btn" label="Make a Donation" />
+                        {/* UPDATED: Wrapped in Link to /donate (and closes menu on click) */}
+                        <Link href="/donate" onClick={toggleMenu} style={{ textDecoration: 'none' }}>
+                            <DonateButton className="nav-donate-btn" label="Make a Donation" />
+                        </Link>
                     </li>
                 </ul>
             </nav>
