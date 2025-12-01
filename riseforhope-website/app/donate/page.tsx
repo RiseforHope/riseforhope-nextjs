@@ -5,7 +5,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Accordion from '../components/Accordion';
+import Accordion from '../components/AccordionItem';
 import Link from 'next/link';
 
 // --- SAFETY CHECK ---
