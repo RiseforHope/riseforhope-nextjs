@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import Header from '../components/Header';
@@ -10,6 +10,26 @@ import Link from 'next/link';
 // --- SAFETY CHECK ---
 const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
 const stripePromise = stripeKey ? loadStripe(stripeKey) : null;
+
+// --- FAQ DATA ---
+const faqs = [
+    {
+        question: "Is my donation tax-deductible?",
+        answer: "Yes. Rise for Hope is a registered 501(c)(3) nonprofit organization. Your donation is tax-deductible to the full extent allowed by law. You will receive an email receipt immediately after your donation."
+    },
+    {
+        question: "How is my donation used?",
+        answer: "100% of your donation goes directly to our programs supporting families in crisis. We prioritize direct financial assistance for medical bills, housing stability, and essential supplies."
+    },
+    {
+        question: "Can I donate in honor of someone?",
+        answer: "Absolutely. After completing your donation, please reply to the receipt email with the name of the person you are honoring, and we will send a personalized acknowledgement card."
+    },
+    {
+        question: "Is this payment secure?",
+        answer: "Yes. We use Stripe, the industry standard for online payments. Your financial information is encrypted and never stored on our servers."
+    }
+];
 
 export default function DonatePage() {
     const [clientSecret, setClientSecret] = useState('');
@@ -47,27 +67,18 @@ export default function DonatePage() {
             variables: {
                 fontFamily: 'Lato, system-ui, sans-serif',
                 borderRadius: '10px',
-                colorPrimary: '#4285f4', // Brand Blue
+                colorPrimary: '#4285f4',
             },
         },
-        fonts: [
-            {
-                cssSrc: 'https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap',
-            },
-        ],
     };
 
     return (
         <main>
             <Header />
 
-            {/* 1. MAIN WRAPPER */}
             <div className="max-w-container" style={{ padding: '150px 20px 80px', minHeight: '80vh' }}>
-
-                {/* 2. CENTERED COLUMN (Holds Everything) */}
                 <div style={{ maxWidth: '600px', margin: '0 auto' }}>
 
-                    {/* 3. BACK BUTTON: Now inside the centered column */}
                     <div style={{ marginBottom: '40px' }}>
                         <Link href="/" className="item-date" style={{ display: 'inline-block' }}>
                             ← Back to Home
@@ -82,6 +93,7 @@ export default function DonatePage() {
                         Your donation stays right here, helping us support families immediately.
                     </p>
 
+                    {/* DONATION FORM AREA */}
                     {!showForm ? (
                         <div style={{ background: '#f9f9f9', padding: '40px', borderRadius: '20px', textAlign: 'center' }}>
                             <label style={{ display: 'block', marginBottom: '15px', fontWeight: 'bold', fontFamily: 'var(--font-sans)' }}>
@@ -97,7 +109,6 @@ export default function DonatePage() {
                                     fontFamily: 'var(--font-sans)'
                                 }}
                             />
-
                             <button onClick={initializePayment} className="btn-donate" style={{ width: '100%', fontSize: '1.2rem' }}>
                                 Continue to Payment
                             </button>
@@ -111,10 +122,84 @@ export default function DonatePage() {
                             )}
                         </div>
                     )}
+
+                    {/* NEW FAQ SECTION */}
+                    <div style={{ marginTop: '80px', paddingTop: '40px', borderTop: '1px solid #eee' }}>
+                        <h3 className="mission-title" style={{ fontSize: '2rem', textAlign: 'center', marginBottom: '30px' }}>
+                            Common Questions
+                        </h3>
+                        <div className="faq-container">
+                            {faqs.map((faq, index) => (
+                                <AccordionItem key={index} question={faq.question} answer={faq.answer} />
+                            ))}
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <Footer />
         </main>
+    );
+}
+
+// --- SUB-COMPONENTS ---
+
+function AccordionItem({ question, answer }: { question: string, answer: string }) {
+    const [isOpen, setIsOpen] = useState(false);
+    const contentRef = useRef<HTMLDivElement>(null);
+
+    return (
+        <div style={{ borderBottom: '1px solid #eee' }}>
+            <button
+                onClick={() => setIsOpen(!isOpen)}
+                style={{
+                    width: '100%',
+                    padding: '20px 0',
+                    background: 'none',
+                    border: 'none',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    cursor: 'pointer',
+                    textAlign: 'left'
+                }}
+            >
+                <span style={{
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '1.1rem',
+                    fontWeight: 'bold',
+                    color: '#333'
+                }}>
+                    {question}
+                </span>
+                <span style={{
+                    fontSize: '1.5rem',
+                    color: '#4285f4',
+                    transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+                    transition: 'transform 0.3s ease'
+                }}>
+                    +
+                </span>
+            </button>
+            <div
+                ref={contentRef}
+                style={{
+                    maxHeight: isOpen ? `${contentRef.current?.scrollHeight}px` : '0px',
+                    overflow: 'hidden',
+                    transition: 'max-height 0.4s ease-out, opacity 0.4s ease-out',
+                    opacity: isOpen ? 1 : 0
+                }}
+            >
+                <p style={{
+                    paddingBottom: '20px',
+                    fontFamily: 'var(--font-sans)',
+                    lineHeight: '1.6',
+                    color: '#666'
+                }}>
+                    {answer}
+                </p>
+            </div>
+        </div>
     );
 }
 
@@ -126,9 +211,7 @@ function CheckoutForm() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
         if (!stripe || !elements) return;
-
         setIsLoading(true);
 
         const { error } = await stripe.confirmPayment({
@@ -138,17 +221,13 @@ function CheckoutForm() {
             },
         });
 
-        if (error) {
-            setMessage(error.message || 'An unexpected error occurred.');
-        }
+        if (error) setMessage(error.message || 'An unexpected error occurred.');
         setIsLoading(false);
     };
 
     return (
         <form onSubmit={handleSubmit}>
             <PaymentElement />
-
-            {/* SECURITY BADGE */}
             <div style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
                 margin: '20px 0 10px', color: '#666', fontSize: '0.8rem', background: '#f4f4f4',
@@ -160,7 +239,6 @@ function CheckoutForm() {
                 </svg>
                 <span>Guaranteed <strong>Safe & Secure</strong> Checkout</span>
             </div>
-
             <button
                 disabled={isLoading || !stripe || !elements}
                 className="btn-donate"
@@ -168,11 +246,9 @@ function CheckoutForm() {
             >
                 {isLoading ? 'Processing...' : 'Pay Now'}
             </button>
-
             <div style={{ textAlign: 'center', marginTop: '15px', fontSize: '0.75rem', color: '#999', fontFamily: 'var(--font-sans)' }}>
                 <span style={{ opacity: 0.7 }}>Powered by</span> <strong>stripe</strong>
             </div>
-
             {message && (
                 <div style={{
                     color: '#e53935', marginTop: '20px', textAlign: 'center',
