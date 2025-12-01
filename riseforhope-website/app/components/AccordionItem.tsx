@@ -13,15 +13,16 @@ export default function Accordion({ question, answer }: { question: string, answ
                 style={{
                     width: '100%',
                     padding: '20px 0',
-                    background: 'none',
+                    background: 'transparent', // Ensures no unwanted background color
                     border: 'none',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     cursor: 'pointer',
                     textAlign: 'left',
-                    // FIX: Removes the blue flash on mobile tap
-                    WebkitTapHighlightColor: 'transparent',
+                    // --- FIXES ---
+                    outline: 'none',
+                    WebkitTapHighlightColor: 'transparent', // Removes the blue/gray flash on tap
                     userSelect: 'none'
                 }}
             >
@@ -35,7 +36,7 @@ export default function Accordion({ question, answer }: { question: string, answ
                 </span>
                 <span style={{
                     fontSize: '1.5rem',
-                    // FIX: Changed color to black
+                    // Changed from blue to black as requested
                     color: '#1D1B1A',
                     transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
                     transition: 'transform 0.3s ease'
