@@ -2,39 +2,28 @@
 
 import { useState, useRef } from 'react';
 
-interface AccordionItemProps {
-    question: string;
-    answer: string;
-}
-
-export default function AccordionItem({ question, answer }: AccordionItemProps) {
+export default function Accordion({ question, answer }: { question: string, answer: string }) {
     const [isOpen, setIsOpen] = useState(false);
     const contentRef = useRef<HTMLDivElement>(null);
 
     return (
-        <div style={{
-            marginBottom: '15px',
-            borderRadius: '10px',
-            overflow: 'hidden',
-            border: '1px solid #eee' // Optional border for definition
-        }}>
+        <div style={{ borderBottom: '1px solid #eee' }}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 style={{
                     width: '100%',
-                    padding: '20px',
-                    // Soft background color (matches the donation form background #f9f9f9)
-                    background: '#f9f9f9',
+                    padding: '20px 0',
+                    background: 'none',
                     border: 'none',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     cursor: 'pointer',
                     textAlign: 'left',
-                    transition: 'background-color 0.3s ease'
+                    // FIX: Removes the blue flash on mobile tap
+                    WebkitTapHighlightColor: 'transparent',
+                    userSelect: 'none'
                 }}
-                onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#f0f0f0'}
-                onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f9f9f9'}
             >
                 <span style={{
                     fontFamily: 'var(--font-sans)',
@@ -46,7 +35,8 @@ export default function AccordionItem({ question, answer }: AccordionItemProps) 
                 </span>
                 <span style={{
                     fontSize: '1.5rem',
-                    color: '#4285f4',
+                    // FIX: Changed color to black
+                    color: '#1D1B1A',
                     transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
                     transition: 'transform 0.3s ease'
                 }}>
@@ -59,16 +49,14 @@ export default function AccordionItem({ question, answer }: AccordionItemProps) 
                     maxHeight: isOpen ? `${contentRef.current?.scrollHeight}px` : '0px',
                     overflow: 'hidden',
                     transition: 'max-height 0.4s ease-out, opacity 0.4s ease-out',
-                    opacity: isOpen ? 1 : 0,
-                    background: '#fff' // White background for the answer content
+                    opacity: isOpen ? 1 : 0
                 }}
             >
                 <p style={{
-                    padding: '20px',
+                    paddingBottom: '20px',
                     fontFamily: 'var(--font-sans)',
                     lineHeight: '1.6',
-                    color: '#666',
-                    margin: 0
+                    color: '#666'
                 }}>
                     {answer}
                 </p>

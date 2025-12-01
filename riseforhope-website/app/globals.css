@@ -21,7 +21,14 @@
   --font-sans: var(--font-sans);
 
   --header-height: 90px;
-  --desktop-padding: 120px;
+  --desktop-padding: 120px; /* Large screens */
+}
+
+/* --- FIX: ADDED FOR LAPTOPS (16 inch screens) --- */
+@media (max-width: 1600px) {
+  :root {
+    --desktop-padding: 60px; /* Reduced by half for laptops */
+  }
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -79,7 +86,7 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
 .nav-overlay {
   position: fixed; top: 0; left: 0; width: 100%;
   height: 100vh; /* Fallback */
-  height: 100dvh; /* FIX: Covers entire screen on mobile browsers */
+  height: 100dvh;
   background-color: var(--col-black); z-index: 1500; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.5s ease;
 }
 .nav-overlay.active { opacity: 1; visibility: visible; pointer-events: auto; }
@@ -106,7 +113,6 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
   margin-top: calc(var(--header-height) * -1);
   padding-top: var(--header-height);
   background-color: transparent;
-  /* FIX: Align strictly with header padding variables */
   padding-left: var(--desktop-padding);
   padding-right: var(--desktop-padding);
 }
@@ -115,7 +121,6 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
   position: absolute;
   top: 0;
   height: 100%;
-  /* FIX: Image starts exactly where padding starts */
   left: var(--desktop-padding);
   width: calc(100% - (var(--desktop-padding) * 2));
   z-index: 0;
@@ -219,7 +224,6 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
 
 @media (max-width: 1024px) {
   :root { --desktop-padding: 40px; }
-  /* Tablet alignment maintained */
   .hero-bg-layer { left: var(--desktop-padding); width: calc(100% - (var(--desktop-padding) * 2)); }
   .infocus-row { grid-template-columns: 1fr; box-shadow: none; gap: 0; margin-bottom: 60px; }
   .infocus-image { min-height: 350px; }
