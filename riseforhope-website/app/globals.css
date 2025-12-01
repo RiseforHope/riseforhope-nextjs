@@ -1,10 +1,8 @@
 /* =========================================
    1. RESET & VARIABLES
    ========================================= */
-/* At the top of globals.css */
 @font-face {
   font-family: 'BrandFontItalic';
-  /* Assuming the font is in your public/fonts folder */
   src: url('/fonts/MyBrandFont-Italic.woff2') format('woff2');
   font-weight: normal;
   font-style: italic;
@@ -64,12 +62,9 @@ a { text-decoration: none; color: inherit; }
   width: 100%;
   height: var(--header-height);
   background-color: var(--col-white);
-
-  /* DESKTOP LAYOUT: Center the Logo */
   display: flex;
   justify-content: center;
   align-items: center;
-
   padding: 0 var(--desktop-padding);
   z-index: 2000;
   border-bottom: none;
@@ -90,16 +85,15 @@ a { text-decoration: none; color: inherit; }
 /* DESKTOP: Float Menu & Donate Button to the Right */
 .menu-toggle {
   position: absolute;
-  right: var(--desktop-padding); /* Align with content edge (88px) */
+  right: var(--desktop-padding);
   top: 50%;
   transform: translateY(-50%);
-
   background: none; border: none; cursor: pointer; display: flex; align-items: center; padding: 10px 0; z-index: 2010;
 }
 
 .desktop-donate-btn {
   position: absolute;
-  right: calc(var(--desktop-padding) + 60px); /* Position to the left of the burger menu */
+  right: calc(var(--desktop-padding) + 60px);
   top: 50%;
   transform: translateY(-50%);
 }
@@ -166,10 +160,21 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
 .scroll-text { color: #fff; font-family: var(--font-sans); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.2em; font-weight: 700; }
 
 /* =========================================
-   BUTTONS
+   BUTTONS & ARROWS (FIXED)
    ========================================= */
-.btn-arrow, .btn-yellow-arrow { font-size: 0.8rem; margin-left: 10px; display: inline-block; }
-.btn-yellow-arrow { font-size: 0; width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 7px solid var(--col-black); }
+/* FIX: Universal Arrow Style - Replaces emojis with pure CSS Triangles */
+.btn-arrow, .btn-yellow-arrow, .card-arrow, .text-link-arrow {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 7px solid currentColor; /* Takes color from the button text */
+  margin-left: 10px;
+  font-size: 0; /* Hides any existing emoji text */
+  transform: translateY(0px); /* Optical alignment */
+  transition: transform 0.3s ease, border-left-color 0.3s ease;
+}
 
 .btn-donate, .btn-cyan, .btn-yellow, .pathway-card {
   display: inline-flex; align-items: center; justify-content: center;
@@ -186,7 +191,7 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
   filter: brightness(1.02);
   color: var(--col-black);
 }
-.btn-yellow:hover .btn-yellow-arrow, .pathway-card:hover .card-arrow { border-left-color: var(--col-black); }
+
 .pathway-card:hover .card-arrow { transform: translateX(5px); }
 
 /* =========================================
@@ -198,9 +203,6 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
 .mission-text { font-family: var(--font-sans); font-size: 1.2rem; line-height: 1.6; color: var(--col-black); margin-bottom: 50px; }
 .impact-quote-section { background-color: #f9f9f9; width: 100%; }
 
-/* =========================================
-   6. PATHWAYS
-   ========================================= */
 /* =========================================
    6. PATHWAYS SECTION
    ========================================= */
@@ -217,147 +219,45 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  /* UPDATED: Removed Radius */
   border-radius: 0;
 }
 
 .pathway-card .card-text {
-  font-family: var(--font-serif);
-  font-size: 1.75rem;
-  line-height: 1.2;
-  color: var(--col-black);
-  max-width: 85%;
-  text-transform: none;
-
-  /* UPDATED: Removed Bold */
-  font-weight: 400;
+  font-family: var(--font-serif); font-size: 1.75rem; line-height: 1.2;
+  color: var(--col-black); max-width: 85%; text-transform: none; font-weight: 400;
 }
-
-.card-arrow { width: 0; height: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 8px solid var(--col-black); transition: transform 0.3s ease; }
 
 .pathways-links { display: flex; gap: 40px; }
 .text-link { font-family: var(--font-serif); font-size: 1.5rem; color: var(--col-black); border-bottom: 1px solid var(--col-black); padding-bottom: 2px; transition: color 0.3s ease, border-color 0.3s ease; display: inline-flex; align-items: center; gap: 10px; }
-.text-link-arrow { width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 7px solid var(--col-black); transition: border-left-color 0.3s ease; }
 .text-link:hover { color: var(--col-gold); border-color: var(--col-gold); }
 .text-link:hover .text-link-arrow { border-left-color: var(--col-gold); }
 
 /* =========================================
-   7. IN FOCUS SECTION (FIXED LAYOUT & SWAP)
+   7. IN FOCUS SECTION
    ========================================= */
-.infocus-section {
-  padding: 80px 0;
-  background-color: var(--col-white);
-  width: 100%;
-}
+.infocus-section { padding: 80px 0; background-color: var(--col-white); width: 100%; }
+.infocus-row { display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 80px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); position: relative; }
+.infocus-image { min-height: 450px; background-size: cover; background-position: center; position: relative; z-index: 1; }
+.infocus-content { background-color: var(--col-white); padding: 60px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; position: relative; z-index: 2; }
 
-/* The Grid Row */
-.infocus-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* 50% / 50% split */
-  margin-bottom: 80px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-  position: relative;
-}
+/* Reversed Order */
+.infocus-row.reversed .infocus-image { order: 2; }
+.infocus-row.reversed .infocus-content { order: 1; }
 
-.infocus-image {
-  min-height: 450px;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  z-index: 1;
-  /* Default: Natural order (Image is 1st in HTML, so it sits Left) */
-}
+/* Triangle Notches */
+.infocus-content::before { content: ''; position: absolute; top: 50%; transform: translateY(-50%); width: 0; height: 0; border-top: 25px solid transparent; border-bottom: 25px solid transparent; z-index: 10; }
+.infocus-row:not(.reversed) .infocus-content::before { left: -25px; border-right: 25px solid var(--col-white); }
+.infocus-row.reversed .infocus-content::before { right: -25px; border-left: 25px solid var(--col-white); }
 
-.infocus-content {
-  background-color: var(--col-white);
-  padding: 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  position: relative;
-  z-index: 2;
-}
-
-/* --- REVERSED ROW LOGIC (SWAP SIDES) --- */
-/* This moves the Image to the Right side on desktop */
-.infocus-row.reversed .infocus-image {
-  order: 2;
-}
-.infocus-row.reversed .infocus-content {
-  order: 1;
-}
-
-/* --- THE WHITE NOTCH (TRIANGLE) --- */
-.infocus-content::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 0;
-  height: 0;
-  border-top: 25px solid transparent;
-  border-bottom: 25px solid transparent;
-  z-index: 10;
-}
-
-/* 1. STANDARD (Image Left, Content Right) */
-/* Triangle sits on LEFT edge of content, pointing Left */
-.infocus-row:not(.reversed) .infocus-content::before {
-  left: -25px;
-  border-right: 25px solid var(--col-white);
-}
-
-/* 2. REVERSED (Content Left, Image Right) */
-/* Triangle sits on RIGHT edge of content, pointing Right */
-.infocus-row.reversed .infocus-content::before {
-  right: -25px;
-  border-left: 25px solid var(--col-white);
-}
-
-/* Typography */
-.infocus-title {
-  font-family: var(--font-serif);
-  font-size: 2.5rem;
-  font-weight: 300;
-  margin-bottom: 20px;
-  color: var(--col-black);
-}
-.infocus-desc {
-  font-family: var(--font-sans);
-  font-size: 1.1rem;
-  color: #555;
-  line-height: 1.6;
-  margin-bottom: 30px;
-}
+.infocus-title { font-family: var(--font-serif); font-size: 2.5rem; font-weight: 300; margin-bottom: 20px; color: var(--col-black); }
+.infocus-desc { font-family: var(--font-sans); font-size: 1.1rem; color: #555; line-height: 1.6; margin-bottom: 30px; }
 
 /* =========================================
-   8. NEWS & EVENTS (RESTORED GRID)
+   8. NEWS & EVENTS
    ========================================= */
-.news-events-section {
-  padding: 80px 0;
-  background-color: var(--col-white);
-  width: 100%;
-}
-
-/* Internal Grid Wrapper Style */
-.news-events-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-}
-
-.featured-image-container {
-  width: 100%;
-  height: 300px;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  margin-bottom: 30px;
-  background-color: #eee; /* Fallback */
-}
-
+.news-events-section { padding: 80px 0; background-color: var(--col-white); width: 100%; }
+.news-events-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+.featured-image-container { width: 100%; height: 300px; background-size: cover; background-position: center; position: relative; margin-bottom: 30px; background-color: #eee; }
 .notch-up { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-bottom: 20px solid var(--col-white); }
 .news-list-item, .events-list-item { margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
 .news-list-item:last-child, .events-list-item:last-child { border-bottom: none; }
@@ -370,18 +270,9 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
    9. SOCIAL MEDIA SECTION
    ========================================= */
 .social-section {
-  width: 100%; /* Background goes edge-to-edge */
-  background-color: #f9f9f9;
-  color: var(--col-black);
-
-  /* PADDING HANDLES THE ALIGNMENT */
-  /* Top/Bottom: 80px. Left/Right: 120px (Matches Hero) */
-  padding: 80px var(--desktop-padding);
-
-  box-sizing: border-box; /* Keeps padding inside the width */
+  width: 100%; background-color: #f9f9f9; color: var(--col-black);
+  padding: 80px var(--desktop-padding); box-sizing: border-box;
 }
-
-/* ... keep internal social classes (.insta-header, .insta-grid, etc) the same ... */
 .insta-header { display: flex; align-items: center; margin-bottom: 40px; }
 .insta-avatar { width: 60px; height: 60px; border-radius: 50%; background-color: #555; background-image: url('https://res.cloudinary.com/dvexnl19a/image/upload/v1764050764/IMG_0979_kddbxw.jpg'); background-size: cover; margin-right: 20px; border: 2px solid var(--col-white); }
 .insta-meta { font-family: var(--font-sans); }
@@ -394,25 +285,13 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
 .insta-image-container:hover .insta-overlay { opacity: 1; background: rgba(0,0,0,0.4); }
 .play-icon { width: 0; height: 0; border-top: 15px solid transparent; border-bottom: 15px solid transparent; border-left: 25px solid var(--col-white); }
 
-
 /* =========================================
    10. FOOTER SECTION
    ========================================= */
 .site-footer {
-  width: 100%; /* Background goes edge-to-edge */
-  background-color: var(--col-black);
-  color: var(--col-white);
-  text-align: center;
-  font-family: var(--font-serif);
-
-  /* PADDING HANDLES THE ALIGNMENT */
-  /* Top: 100px. Left/Right: 120px (Matches Hero). Bottom: 40px */
-  padding: 100px var(--desktop-padding) 40px;
-
-  box-sizing: border-box;
+  width: 100%; background-color: var(--col-black); color: var(--col-white); text-align: center; font-family: var(--font-serif);
+  padding: 100px var(--desktop-padding) 40px; box-sizing: border-box;
 }
-
-/* ... keep internal footer classes (.footer-logo-area, etc) the same ... */
 .footer-logo-area { margin-bottom: 40px; }
 .footer-title { font-size: 2.5rem; font-weight: 300; letter-spacing: 0.05em; margin-bottom: 5px; }
 .footer-subtitle { font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.9rem; }
@@ -437,10 +316,8 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
 
   .infocus-row { grid-template-columns: 1fr; box-shadow: none; gap: 0; margin-bottom: 60px; }
   .infocus-image { min-height: 350px; }
-  /* Ensure image is on top for tablet */
   .infocus-row.reversed .infocus-image { order: -1; }
   .infocus-row.reversed .infocus-content { order: 0; }
-
   .infocus-content::before { display: none; }
   .infocus-content { padding: 40px 0; }
 
@@ -453,27 +330,11 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
   :root { --header-height: 70px; }
 
   /* 1. HEADER: Keep Logo Centered */
-  .site-header {
-    padding: 0 20px;
-    justify-content: center; /* Force Center */
-  }
+  .site-header { padding: 0 20px; justify-content: center; }
+  .site-logo { text-align: center; align-items: center; }
 
-  .site-logo {
-    text-align: center;
-    align-items: center;
-  }
-
-  /* 2. MENU: Position Absolute Right (Like Desktop but tighter margin) */
-  .menu-toggle {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .desktop-donate-btn { display: none; }
-  .menu-label { display: none; }
-
+  .menu-toggle { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); }
+  .desktop-donate-btn, .menu-label { display: none; }
   .site-logo-text { font-size: 1.4rem; }
   .nav-link { font-size: 1.8rem; }
 
@@ -489,10 +350,20 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
     padding-left: 20px; padding-right: 20px; border-radius: 0;
   }
 
-  .rise-hero { height: auto; min-height: 500px; padding-left: 0; padding-right: 0; }
+  /* FIX: Mobile Hero Height (100svh ensures it fits perfectly on mobile) */
+  .rise-hero {
+    height: 100svh;
+    min-height: 500px;
+    padding-left: 0;
+    padding-right: 0;
+  }
   .hero-bg-layer { left: 0 !important; width: 100% !important; }
 
   .pathways-grid { grid-template-columns: 1fr; }
+
+  /* FIX: Reduce card padding on mobile to fix horizontal squishing */
+  .pathway-card { padding: 30px 20px; }
+
   .pathways-links { flex-direction: column; gap: 20px; align-items: flex-start; }
   .insta-item { width: 100%; margin-bottom: 20px; }
   .footer-links { flex-direction: column; gap: 15px; }
@@ -514,63 +385,16 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
 @keyframes slideUp { from { transform: translateY(30px) scale(0.95); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
 
 /* =========================================
-   12. SOFT QUOTE COMPONENT (FIXED PADDING)
+   12. SOFT QUOTE COMPONENT
    ========================================= */
-.soft-quote-section {
-  padding: 100px 0;
-  background-color: transparent;
-  width: 100%;
-}
+.soft-quote-section { padding: 100px 0; background-color: transparent; width: 100%; }
+.soft-quote-card { position: relative; max-width: 900px; margin: 0 auto; padding: 0 30px; text-align: center; }
+.quote-mark { font-family: var(--font-serif); font-size: 8rem; line-height: 0; color: #FDCCF1; position: absolute; opacity: 1; }
+.quote-open { top: -40px; left: 20px; transform: none; }
+.quote-close { bottom: -40px; right: 20px; transform: none; }
+.soft-quote-text { font-family: var(--font-serif); font-weight: 400; font-style: italic; font-size: 3.2rem; line-height: 1.3; color: var(--col-black); position: relative; z-index: 2; margin: 0; }
+.soft-quote-divider, .soft-quote-author { display: none; }
 
-.soft-quote-card {
-  position: relative;
-  max-width: 900px; /* Constrain width so lines don't get too long */
-  margin: 0 auto;
-  /* Safe padding on sides so quotes don't touch screen edges */
-  padding: 0 30px;
-  text-align: center;
-}
-
-.quote-mark {
-  font-family: var(--font-serif);
-  font-size: 8rem;
-  line-height: 0;
-  color: #FDCCF1; /* Pink Brand Color */
-  position: absolute;
-  opacity: 1;
-}
-
-/* Position: Top Left (Inside the padding) */
-.quote-open {
-  top: -40px;
-  left: 20px; /* Aligned safely inside */
-  transform: none; /* Remove centering transforms */
-}
-
-/* Position: Bottom Right (Inside the padding) */
-.quote-close {
-  bottom: -40px;
-  right: 20px; /* Aligned safely inside */
-  transform: none;
-}
-
-.soft-quote-text {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  font-style: italic;
-  font-size: 3.2rem;
-  line-height: 1.3;
-  color: var(--col-black);
-  position: relative;
-  z-index: 2;
-  margin: 0;
-}
-
-.soft-quote-divider, .soft-quote-author {
-  display: none;
-}
-
-/* RESPONSIVE ADJUSTMENTS */
 @media (max-width: 1024px) {
   .soft-quote-text { font-size: 2.5rem; }
   .quote-mark { font-size: 6rem; }
@@ -580,25 +404,9 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
 
 @media (max-width: 768px) {
   .soft-quote-section { padding: 60px 0; }
-
-  /* Add vertical padding to card so quotes don't overlap text on small screens */
   .soft-quote-card { padding: 40px 20px; }
-
-  .soft-quote-text {
-    font-size: 1.8rem;
-    line-height: 1.5;
-  }
-
+  .soft-quote-text { font-size: 1.8rem; line-height: 1.5; }
   .quote-mark { font-size: 4rem; }
-
-  /* FIX: Push quotes inward (20px) so they don't touch screen edges */
-  .quote-open {
-    top: -10px;
-    left: 20px;
-  }
-
-  .quote-close {
-    bottom: -10px;
-    right: 20px;
-  }
+  .quote-open { top: -10px; left: 20px; }
+  .quote-close { bottom: -10px; right: 20px; }
 }
