@@ -21,7 +21,6 @@
   --font-sans: var(--font-sans);
 
   --header-height: 90px;
-  /* Note: The hero now uses container logic, so this var is mostly for the header positioning */
   --desktop-padding: 120px;
 }
 
@@ -94,7 +93,7 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
 .nav-link { font-family: var(--font-serif); font-size: 2.5rem; font-weight: 300; color: var(--col-white); transition: color 0.3s; }
 .nav-link:hover { color: var(--col-gold); }
 
-/* --- HERO SECTION MODIFIED FOR ALIGNMENT --- */
+/* --- HERO SECTION --- */
 .rise-hero {
   position: relative;
   width: 100%;
@@ -107,22 +106,18 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
   margin-top: calc(var(--header-height) * -1);
   padding-top: var(--header-height);
   background-color: transparent;
-
-  /* FIX: Align with max-w-container logic instead of variable padding */
-  max-width: 1440px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 30px;
-  padding-right: 30px;
+  /* FIX: Align strictly with header padding variables */
+  padding-left: var(--desktop-padding);
+  padding-right: var(--desktop-padding);
 }
 
 .hero-bg-layer {
   position: absolute;
   top: 0;
   height: 100%;
-  /* FIX: Layer now fills the container padding area */
-  left: 30px;
-  width: calc(100% - 60px);
+  /* FIX: Image starts exactly where padding starts */
+  left: var(--desktop-padding);
+  width: calc(100% - (var(--desktop-padding) * 2));
   z-index: 0;
 }
 
@@ -224,6 +219,7 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
 
 @media (max-width: 1024px) {
   :root { --desktop-padding: 40px; }
+  /* Tablet alignment maintained */
   .hero-bg-layer { left: var(--desktop-padding); width: calc(100% - (var(--desktop-padding) * 2)); }
   .infocus-row { grid-template-columns: 1fr; box-shadow: none; gap: 0; margin-bottom: 60px; }
   .infocus-image { min-height: 350px; }
@@ -238,25 +234,24 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
 /* --- MOBILE FIXES --- */
 @media (max-width: 768px) {
   :root { --header-height: 70px; }
-  .site-header { padding: 0 10px; justify-content: center; } /* Reduced Header padding */
+  .site-header { padding: 0 10px; justify-content: center; }
   .site-logo { text-align: center; align-items: center; }
-  .menu-toggle { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); } /* Adjusted toggle position */
+  .menu-toggle { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); }
   .desktop-donate-btn, .menu-label { display: none; }
   .site-logo-text { font-size: 1.4rem; }
   .nav-link { font-size: 1.8rem; }
 
-  /* Gutter Consistency (FIX: Reduced padding to 10px as requested) */
+  /* Gutter Consistency (FIX: Reduced padding to 10px) */
   .max-w-container, .pathways-section, .infocus-section, .news-events-section, .mission-section {
     padding-left: 10px !important; padding-right: 10px !important; padding-top: 60px; padding-bottom: 60px;
   }
   .site-footer, .social-section { width: 100% !important; max-width: 100% !important; margin: 0 !important; padding-left: 10px; padding-right: 10px; border-radius: 0; }
 
-  /* FIX: Mobile Hero Height - Uses 100svh */
+  /* FIX: Mobile Hero goes full bleed (no horizontal padding) */
   .rise-hero { height: 100svh; min-height: 100svh; padding-left: 0; padding-right: 0; }
   .hero-bg-layer { left: 0 !important; width: 100% !important; }
 
   .pathways-grid { grid-template-columns: 1fr; }
-  /* FIX: Reduced card padding */
   .pathway-card { padding: 25px 15px; }
   .pathways-links { flex-direction: column; gap: 20px; align-items: flex-start; }
   .insta-item { width: 100%; margin-bottom: 20px; }
@@ -268,7 +263,7 @@ body.menu-open .burger-icon span:nth-child(3) { transform: translateY(-9px) rota
     justify-content: center;
     gap: 15px;
   }
-  .footer-links li.separator { display: inline-block; } /* Show separator if needed, or hide if preferred */
+  .footer-links li.separator { display: inline-block; }
 
   .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
   .scroll-btn { bottom: 20px; }
