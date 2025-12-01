@@ -10,7 +10,7 @@ export default function Footer() {
                 <img
                     src="https://res.cloudinary.com/dvexnl19a/image/upload/v1764609719/loho-r4h-white_3x_sakbjh.png"
                     alt="Rise For Hope"
-                    style={{ height: '60px', width: 'auto', margin: '0 auto' }}
+                    style={{ height: '30px', width: 'auto', margin: '0 auto' }}
                 />
             </div>
 
