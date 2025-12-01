@@ -5,8 +5,8 @@ import Link from 'next/link';
 import DonateButton from './DonateButton';
 
 // 1. DEFINE LOGOS
-const MAIN_LOGO = 'https://res.cloudinary.com/dvexnl19a/image/upload/v1764379593/logo-tree-r4h_2x_f1gixs.png';
-const WHITE_LOGO = 'https://res.cloudinary.com/dvexnl19a/image/upload/v1764380694/logo-tree-white-r4h_2x_rep1gq.png';
+const MAIN_LOGO = 'https://res.cloudinary.com/dvexnl19a/image/upload/v1764609683/logo-r4h-tree-blue_3x_q47uen.png';
+const WHITE_LOGO = 'https://res.cloudinary.com/dvexnl19a/image/upload/v1764609719/loho-r4h-white_3x_sakbjh.png';
 
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false);

@@ -8,7 +8,7 @@ export default function Footer() {
             <div className="footer-logo-area">
                 {/* UPDATED: Replaced text with White Logo */}
                 <img
-                    src="https://res.cloudinary.com/dvexnl19a/image/upload/v1764380694/logo-tree-white-r4h_2x_rep1gq.png"
+                    src="https://res.cloudinary.com/dvexnl19a/image/upload/v1764609719/loho-r4h-white_3x_sakbjh.png"
                     alt="Rise For Hope"
                     style={{ height: '80px', width: 'auto', margin: '0 auto' }}
                 />
