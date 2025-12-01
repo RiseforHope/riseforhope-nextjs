@@ -15,7 +15,7 @@ export default function Hero() {
             <div
                 className="hero-bg-layer"
                 style={{
-                    backgroundImage: "url('https://res.cloudinary.com/dvexnl19a/image/upload/v1753549268/image002_pdtno8.jpg')",
+                    backgroundImage: "url('https://res.cloudinary.com/dvexnl19a/image/upload/v1764050764/IMG_0979_kddbxw.jpg')",
                     backgroundSize: 'cover',
 
                     /* UPDATED POSITION:
