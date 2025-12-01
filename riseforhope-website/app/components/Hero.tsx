@@ -24,7 +24,7 @@ export default function Hero() {
                        Adjust the 25% number up or down to hit the nose exactly.
                        0% is the very top edge, 100% is the very bottom edge.
                     */
-                    backgroundPosition: '50% 25%',
+                    backgroundPosition: '50% 100%',
 
                     position: 'absolute',
                     height: '100%',
