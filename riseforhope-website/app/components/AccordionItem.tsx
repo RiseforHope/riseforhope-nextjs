@@ -7,22 +7,27 @@ export default function Accordion({ question, answer }: { question: string, answ
     const contentRef = useRef<HTMLDivElement>(null);
 
     return (
-        <div style={{ borderBottom: '1px solid #eee' }}>
+        <div style={{
+            // FIX: Added soft background, rounded corners, and spacing to match Donate Form
+            background: '#f9f9f9',
+            borderRadius: '15px',
+            marginBottom: '15px',
+            padding: '0 25px' // Horizontal padding inside the bubble
+        }}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 style={{
                     width: '100%',
                     padding: '20px 0',
-                    background: 'transparent', // Ensures no unwanted background color
+                    background: 'transparent',
                     border: 'none',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     cursor: 'pointer',
                     textAlign: 'left',
-                    // --- FIXES ---
                     outline: 'none',
-                    WebkitTapHighlightColor: 'transparent', // Removes the blue/gray flash on tap
+                    WebkitTapHighlightColor: 'transparent',
                     userSelect: 'none'
                 }}
             >
@@ -36,7 +41,6 @@ export default function Accordion({ question, answer }: { question: string, answ
                 </span>
                 <span style={{
                     fontSize: '1.5rem',
-                    // Changed from blue to black as requested
                     color: '#1D1B1A',
                     transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
                     transition: 'transform 0.3s ease'
@@ -57,7 +61,8 @@ export default function Accordion({ question, answer }: { question: string, answ
                     paddingBottom: '20px',
                     fontFamily: 'var(--font-sans)',
                     lineHeight: '1.6',
-                    color: '#666'
+                    color: '#666',
+                    margin: 0 // Clean up default margins
                 }}>
                     {answer}
                 </p>

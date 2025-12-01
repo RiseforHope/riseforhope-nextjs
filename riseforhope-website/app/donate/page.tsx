@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Accordion from '../components/AccordionItem'; // Imported your component
+import Accordion from '../components/Accordion';
 import Link from 'next/link';
 
 // --- SAFETY CHECK ---
@@ -41,7 +41,7 @@ export default function DonatePage() {
         return (
             <main>
                 <Header />
-                <div className="max-w-container" style={{ padding: '150px 20px', textAlign: 'center', color: 'red' }}>
+                <div className="max-w-container" style={{ paddingTop: '150px', textAlign: 'center', color: 'red' }}>
                     <h1>Configuration Error</h1>
                     <p>The Stripe Publishable Key is missing.</p>
                 </div>
@@ -77,7 +77,9 @@ export default function DonatePage() {
         <main>
             <Header />
 
-            <div className="max-w-container" style={{ padding: '150px 20px 80px', minHeight: '80vh' }}>
+            {/* FIX: Removed '20px' horizontal padding override.
+                Using paddingTop/Bottom ensures horizontal padding inherits from .max-w-container */}
+            <div className="max-w-container" style={{ paddingTop: '150px', paddingBottom: '80px', minHeight: '80vh' }}>
                 <div style={{ maxWidth: '600px', margin: '0 auto' }}>
 
                     <div style={{ marginBottom: '40px' }}>
@@ -124,17 +126,13 @@ export default function DonatePage() {
                         </div>
                     )}
 
-                    {/* NEW FAQ SECTION */}
+                    {/* FAQ SECTION */}
                     <div style={{ marginTop: '80px', paddingTop: '40px', borderTop: '1px solid #eee' }}>
                         <h3 className="mission-title" style={{ fontSize: '2rem', textAlign: 'center', marginBottom: '30px' }}>
                             Common Questions
                         </h3>
                         <div className="faq-container">
                             {faqs.map((faq, index) => (
-                                /* Using your existing Accordion component here.
-                                   Ensure props 'question' and 'answer' match what your component expects
-                                   (e.g. maybe it expects 'title' and 'content' instead).
-                                */
                                 <Accordion
                                     key={index}
                                     question={faq.question}
