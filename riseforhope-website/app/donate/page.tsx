@@ -97,7 +97,7 @@ export default function DonatePage() {
 
                     {/* --- ADDED TRACKER HERE --- */}
                     {/* Ideally, fetch 'currentAmount' from your database. Hardcoded example below: */}
-                    <DonationTracker currentAmount={3500} goalAmount={12500} />
+                    <DonationTracker currentAmount={630} goalAmount={10000} />
 
                     {/* DONATION FORM AREA */}
                     {!showForm ? (
