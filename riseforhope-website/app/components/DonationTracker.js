@@ -99,6 +99,19 @@ export default function DonationTracker({ currentAmount = 0, goalAmount = 12500 
                 {Math.round(progress)}% Funded
             </div>
 
+            {/* NEW IMPACT TEXT */}
+            <p style={{
+                marginTop: '25px',
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.95rem',
+                lineHeight: '1.6',
+                color: '#555',
+                paddingTop: '20px',
+                borderTop: '1px solid rgba(0,0,0,0.05)' // Subtle separator
+            }}>
+                Every dollar becomes a small miracle in a family’s holiday: food on the table, gifts for their child, and the reminder that love still finds its way in dark seasons.
+            </p>
+
         </div>
     );
 }
