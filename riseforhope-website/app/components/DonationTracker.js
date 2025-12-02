@@ -46,7 +46,7 @@ export default function DonationTracker({ currentAmount = 0, goalAmount = 12500 
                 color: '#666',
                 marginBottom: '15px'
             }}>
-                Our Christmas Goal
+                Our Christmas Goal 2025
             </h3>
 
             {/* BIG NUMBERS */}
