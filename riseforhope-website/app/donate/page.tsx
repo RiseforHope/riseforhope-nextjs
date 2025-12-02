@@ -5,7 +5,8 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Accordion from '../components/AccordionItem';
+import Accordion from '../components/AccordionItem'; // Ensure this path matches your file structure
+import DonationTracker from '../components/DonationTracker'; // IMPORTED HERE
 import Link from 'next/link';
 
 // --- SAFETY CHECK ---
@@ -77,8 +78,6 @@ export default function DonatePage() {
         <main>
             <Header />
 
-            {/* FIX: Removed '20px' horizontal padding override.
-                Using paddingTop/Bottom ensures horizontal padding inherits from .max-w-container */}
             <div className="max-w-container" style={{ paddingTop: '150px', paddingBottom: '80px', minHeight: '80vh' }}>
                 <div style={{ maxWidth: '600px', margin: '0 auto' }}>
 
@@ -95,6 +94,10 @@ export default function DonatePage() {
                     <p className="mission-text" style={{ textAlign: 'center', marginBottom: '50px' }}>
                         Your donation stays right here, helping us support families immediately.
                     </p>
+
+                    {/* --- ADDED TRACKER HERE --- */}
+                    {/* Ideally, fetch 'currentAmount' from your database. Hardcoded example below: */}
+                    <DonationTracker currentAmount={3500} goalAmount={12500} />
 
                     {/* DONATION FORM AREA */}
                     {!showForm ? (
