@@ -88,11 +88,11 @@ export default function DonatePage() {
                     </div>
 
                     <h1 className="mission-title" style={{ textAlign: 'center', marginBottom: '20px' }}>
-                        Support Our Cause
+                        Give Hope to Families Facing Pediatric Cancer
                     </h1>
 
                     <p className="mission-text" style={{ textAlign: 'center', marginBottom: '50px' }}>
-                        Your donation stays right here, helping us support families immediately.
+                        Your gift doesn’t disappear into a system. It stays here, reaching families whose lives revolve around hospitals, treatments, and uncertainty.
                     </p>
 
                     {/* --- ADDED TRACKER HERE --- */}
