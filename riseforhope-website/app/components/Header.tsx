@@ -44,10 +44,8 @@ export default function Header() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
 
                     <div className="desktop-donate-btn">
-                        {/* UPDATED: Wrapped in Link to /donate */}
-                        <Link href="/donate" style={{ textDecoration: 'none' }}>
-                            <DonateButton label="Donate ❤" />
-                        </Link>
+                        {/* Link removed because DonateButton IS the link now */}
+                        <DonateButton label="Donate ❤" />
                     </div>
 
                     <button
@@ -80,9 +78,9 @@ export default function Header() {
 
                     <li style={{ marginTop: '20px', opacity: 1, transform: 'translateY(0)' }}>
                         {/* UPDATED: Wrapped in Link to /donate (and closes menu on click) */}
-                        <Link href="/donate" onClick={toggleMenu} style={{ textDecoration: 'none' }}>
+                        <div onClick={toggleMenu}>
                             <DonateButton className="nav-donate-btn" label="Make a Donation" />
-                        </Link>
+                        </div>
                     </li>
                 </ul>
             </nav>

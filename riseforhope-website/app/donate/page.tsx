@@ -5,8 +5,8 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Accordion from '../components/AccordionItem'; // Ensure this path matches your file structure
-import DonationTracker from '../components/DonationTracker'; // IMPORTED HERE
+import Accordion from '../components/AccordionItem';
+import DonationTracker from '../components/DonationTracker';
 import Link from 'next/link';
 
 // --- SAFETY CHECK ---
@@ -17,7 +17,7 @@ const stripePromise = stripeKey ? loadStripe(stripeKey) : null;
 const faqs = [
     {
         question: "Is my donation tax-deductible?",
-        answer: "Yes. Rise for Hope is a registered 501(c)(3) nonprofit organization. Your donation is tax-deductible to the full extent allowed by law. You will receive an email receipt immediately after your donation."
+        answer: "Yes. Rise for Hope is a registered 501(c)(3) nonprofit organization. Your donation is tax-deductible to the full extent allowed by law."
     },
     {
         question: "How is my donation used?",
@@ -25,17 +25,23 @@ const faqs = [
     },
     {
         question: "Can I donate in honor of someone?",
-        answer: "Absolutely. After completing your donation, please reply to the receipt email with the name of the person you are honoring, and we will send a personalized acknowledgement card."
+        answer: "Absolutely. After completing your donation, please reply to the receipt email with the name of the person you are honoring."
     },
     {
         question: "Is this payment secure?",
         answer: "Yes. We use Stripe, the industry standard for online payments. Your financial information is encrypted and never stored on our servers."
+    },
+    {
+        question: "Are there other ways to support Rise for Hope besides donating money?",
+        answer: "Yes. You can support our work by volunteering, hosting a fundraiser, donating supplies, or partnering with us through your business or organization. Details are available in the “Interested In Partnering With Us?” section of our website."
     }
 ];
 
 export default function DonatePage() {
     const [clientSecret, setClientSecret] = useState('');
     const [amount, setAmount] = useState(50);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
     const [showForm, setShowForm] = useState(false);
 
     if (!stripePromise) {
@@ -55,7 +61,7 @@ export default function DonatePage() {
         const res = await fetch('/api/create-payment-intent', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ amount: amount * 100 }),
+            body: JSON.stringify({ amount: amount * 100 }), // Amount in cents
         });
         const data = await res.json();
         setClientSecret(data.clientSecret);
@@ -95,27 +101,58 @@ export default function DonatePage() {
                         Your gift doesn’t disappear into a system. It stays here, reaching families whose lives revolve around hospitals, treatments, and uncertainty.
                     </p>
 
-                    {/* --- ADDED TRACKER HERE --- */}
-                    {/* Ideally, fetch 'currentAmount' from your database. Hardcoded example below: */}
+                    {/* TRACKER */}
                     <DonationTracker currentAmount={630} goalAmount={10000} />
 
                     {/* DONATION FORM AREA */}
                     {!showForm ? (
                         <div style={{ background: '#f9f9f9', padding: '40px', borderRadius: '20px', textAlign: 'center' }}>
-                            <label style={{ display: 'block', marginBottom: '15px', fontWeight: 'bold', fontFamily: 'var(--font-sans)' }}>
-                                Enter Donation Amount ($)
-                            </label>
-                            <input
-                                type="number"
-                                value={amount}
-                                onChange={(e) => setAmount(Number(e.target.value))}
-                                style={{
-                                    fontSize: '2rem', padding: '15px', width: '100%', borderRadius: '10px',
-                                    border: '1px solid #ddd', textAlign: 'center', marginBottom: '30px',
-                                    fontFamily: 'var(--font-sans)'
-                                }}
-                            />
-                            <button onClick={initializePayment} className="btn-donate" style={{ width: '100%', fontSize: '1.2rem' }}>
+                            {/* Name Input */}
+                            <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+                                <label style={{ display: 'block', fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '5px', fontFamily: 'var(--font-sans)' }}>Full Name</label>
+                                <input
+                                    type="text"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    placeholder="Jane Doe"
+                                    style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #ddd', fontFamily: 'var(--font-sans)' }}
+                                />
+                            </div>
+
+                            {/* Email Input */}
+                            <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+                                <label style={{ display: 'block', fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '5px', fontFamily: 'var(--font-sans)' }}>Email Address</label>
+                                <input
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder="jane@example.com"
+                                    style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #ddd', fontFamily: 'var(--font-sans)' }}
+                                />
+                            </div>
+
+                            {/* Amount Input */}
+                            <div style={{ marginBottom: '30px', textAlign: 'left' }}>
+                                <label style={{ display: 'block', fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '5px', fontFamily: 'var(--font-sans)' }}>
+                                    Donation Amount ($)
+                                </label>
+                                <input
+                                    type="number"
+                                    value={amount}
+                                    onChange={(e) => setAmount(Number(e.target.value))}
+                                    style={{
+                                        fontSize: '2rem', padding: '15px', width: '100%', borderRadius: '10px',
+                                        border: '1px solid #ddd', textAlign: 'center', fontFamily: 'var(--font-sans)'
+                                    }}
+                                />
+                            </div>
+
+                            <button
+                                onClick={initializePayment}
+                                disabled={!name || !email || !amount}
+                                className="btn-donate"
+                                style={{ width: '100%', fontSize: '1.2rem', opacity: (!name || !email) ? 0.6 : 1 }}
+                            >
                                 Continue to Payment
                             </button>
                         </div>
@@ -123,7 +160,8 @@ export default function DonatePage() {
                         <div style={{ background: '#fff', padding: '30px', borderRadius: '20px', border: '1px solid #eee' }}>
                             {clientSecret && (
                                 <Elements stripe={stripePromise} options={stripeOptions}>
-                                    <CheckoutForm />
+                                    {/* FIX: Passing props to CheckoutForm so it knows who to email */}
+                                    <CheckoutForm donorName={name} donorEmail={email} donationAmount={amount} />
                                 </Elements>
                             )}
                         </div>
@@ -152,9 +190,16 @@ export default function DonatePage() {
     );
 }
 
-// --- SUB-COMPONENTS ---
+// --- SUB-COMPONENT: CHECKOUT FORM ---
 
-function CheckoutForm() {
+// Define Types for Props
+interface CheckoutFormProps {
+    donorName: string;
+    donorEmail: string;
+    donationAmount: number;
+}
+
+function CheckoutForm({ donorName, donorEmail, donationAmount }: CheckoutFormProps) {
     const stripe = useStripe();
     const elements = useElements();
     const [message, setMessage] = useState('');
@@ -165,15 +210,46 @@ function CheckoutForm() {
         if (!stripe || !elements) return;
         setIsLoading(true);
 
-        const { error } = await stripe.confirmPayment({
+        // 1. Confirm Payment with Stripe
+        const { error, paymentIntent } = await stripe.confirmPayment({
             elements,
-            confirmParams: {
-                return_url: `${window.location.origin}/donate/success`,
-            },
+            redirect: 'if_required', // IMPORTANT: Prevents immediate redirect
         });
 
-        if (error) setMessage(error.message || 'An unexpected error occurred.');
-        setIsLoading(false);
+        if (error) {
+            setMessage(error.message || 'An unexpected error occurred.');
+            setIsLoading(false);
+        } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+
+            // 2. Payment Successful -> Send Email & Save to DB
+            try {
+                const response = await fetch('/api/send-thank-you', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: donorEmail,
+                        name: donorName,
+                        amount: donationAmount
+                    }),
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error("API Error:", errorData);
+                    // We alert here so you can see if the email fails while testing
+                    alert("Payment succeeded, but email failed: " + JSON.stringify(errorData));
+                }
+
+                // 3. Redirect to Success Page
+                window.location.href = '/donate/success';
+
+            } catch (err: any) {
+                console.error("Network Error:", err);
+                alert("Network error sending email: " + err.message);
+                // Redirect anyway so the user knows payment worked
+                window.location.href = '/donate/success';
+            }
+        }
     };
 
     return (
@@ -195,7 +271,7 @@ function CheckoutForm() {
                 className="btn-donate"
                 style={{ width: '100%', marginTop: '10px', fontSize: '1rem' }}
             >
-                {isLoading ? 'Processing...' : 'Pay Now'}
+                {isLoading ? 'Processing...' : `Donate $${donationAmount}`}
             </button>
             <div style={{ textAlign: 'center', marginTop: '15px', fontSize: '0.75rem', color: '#999', fontFamily: 'var(--font-sans)' }}>
                 <span style={{ opacity: 0.7 }}>Powered by</span> <strong>stripe</strong>

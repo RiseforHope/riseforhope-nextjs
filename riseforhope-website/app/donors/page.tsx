@@ -28,7 +28,7 @@ export default function DonorsInfoPage() {
                         Organization Details
                     </h3>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', fontFamily: 'var(--font-sans)' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', fontFamily: 'var(--font-sans)', marginBottom: '30px' }}>
                         <div>
                             <strong style={{ display: 'block', color: '#888', fontSize: '0.9rem' }}>Official Name</strong>
                             <span style={{ fontSize: '1.1rem' }}>Rise for Hope</span>
@@ -46,6 +46,25 @@ export default function DonorsInfoPage() {
                             <span style={{ fontSize: '1.1rem' }}>East Greenville, PA</span>
                         </div>
                     </div>
+
+                    {/* PDF Link Section */}
+                    <div style={{ borderTop: '1px solid #e5e5e5', paddingTop: '20px' }}>
+                        <a
+                            href="https://app.box.com/s/6p5qazs820pb37b58k4wctx0u0h6p7vw"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                                fontFamily: 'var(--font-sans)',
+                                color: '#1D1B1A',
+                                textDecoration: 'underline',
+                                fontWeight: '400',
+                                fontSize: '1rem',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            Download our IRS Letter (PDF)
+                        </a>
+                    </div>
                 </div>
 
                 {/* FINANCIAL COMMITMENT */}
@@ -59,7 +78,7 @@ export default function DonorsInfoPage() {
                 <div style={{ marginTop: '40px', borderTop: '1px solid #eee', paddingTop: '40px' }}>
                     <h4 style={{ fontFamily: 'var(--font-sans)', fontWeight: 'bold', marginBottom: '10px' }}>Need tax receipts?</h4>
                     <p className="mission-text" style={{ fontSize: '1rem' }}>
-                        For inquiries regarding annual tax receipts or large-scale endowments, please contact our finance team at <a href="mailto:finance@riseforhope.org" style={{ color: 'var(--col-gold)', textDecoration: 'underline' }}>finance@riseforhope.org</a>.
+                        For questions regarding annual tax receipts or large-scale endowments, please contact our finance team at <a href="mailto:finance@riseforhope.org" style={{ color: 'var(--col-gold)', textDecoration: 'underline' }}>finance@riseforhope.org</a>.
                     </p>
                 </div>
 

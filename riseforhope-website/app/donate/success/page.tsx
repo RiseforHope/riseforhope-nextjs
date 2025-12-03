@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+// Adjust these imports based on your actual folder structure
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
@@ -7,23 +10,23 @@ export default function SuccessPage() {
         <main>
             <Header />
 
-            {/* 1. Main Container (Consistent Padding) */}
-            <div className="max-w-container" style={{ padding: '150px 20px', minHeight: '80vh' }}>
+            {/* Main Container */}
+            <div className="max-w-container" style={{ paddingTop: '150px', paddingBottom: '80px', minHeight: '80vh' }}>
 
-                {/* 2. Centered Column (Matches Donate Page) */}
+                {/* Centered Column */}
                 <div style={{ maxWidth: '600px', margin: '0 auto' }}>
 
-                    {/* 3. Back Link (Aligned Left) */}
+                    {/* Back Link */}
                     <div style={{ marginBottom: '40px' }}>
                         <Link href="/" className="item-date" style={{ display: 'inline-block' }}>
                             ← Back to Home
                         </Link>
                     </div>
 
-                    {/* 4. Success Message (Centered) */}
+                    {/* Success Message */}
                     <div style={{ textAlign: 'center' }}>
                         <h1 className="mission-title" style={{
-                            color: 'var(--col-gold)', /* Uses Brand Blue */
+                            color: '#000000',
                             fontSize: '3rem',
                             marginBottom: '20px'
                         }}>

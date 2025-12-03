@@ -1,19 +1,22 @@
 import Link from 'next/link';
 
-// 🔴 REPLACE THIS WITH YOUR STRIPE LINK
-const STRIPE_URL = 'https://donate.stripe.com/28E4gz5YY5jw1xMfTD6kg00';
-
 interface DonateButtonProps {
     className?: string;
     label?: string;
+    href?: string;
 }
 
-export default function DonateButton({ className = '', label = 'Donate Now' }: DonateButtonProps) {
+export default function DonateButton({
+                                         className = '',
+                                         label = 'Donate Now',
+                                         href = '/donate' // Default to your internal page
+                                     }: DonateButtonProps) {
     return (
         <Link
-            href={STRIPE_URL}
-            target="_blank"
+            href={href}
+            // Removed target="_blank" to keep users on your site
             className={`btn-donate ${className}`}
+            style={{ textDecoration: 'none' }}
         >
             {label}
         </Link>
