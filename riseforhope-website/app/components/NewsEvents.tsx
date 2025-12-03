@@ -48,7 +48,7 @@ export default function NewsEvents() {
                         <div className="section-label">Calendar</div>
                         <div
                             className="featured-image-container"
-                            style={{ backgroundImage: "url('https://res.cloudinary.com/dvexnl19a/image/upload/v1764050764/IMG_0979_kddbxw.jpg')" }}
+                            style={{ backgroundImage: "url('https://res.cloudinary.com/dvexnl19a/image/upload/v1764802144/girl-decorating-a-christmas-tree-in-the-snow-528-smartphone-wallpaper_y81pgh.png')" }}
                         >
                             <div className="notch-up"></div>
                         </div>
