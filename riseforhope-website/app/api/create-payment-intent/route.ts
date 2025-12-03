@@ -1,8 +1,11 @@
 import { NextResponse, NextRequest } from 'next/server';
-// @ts-ignore (Stripe doesn't always play nice with import syntax in some TS configs, this is safe)
+// @ts-ignore
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
+// Updated: We explicitly set the apiVersion to match what the installed library expects
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+    apiVersion: '2025-11-17.clover',
+});
 
 export async function POST(request: NextRequest) {
     try {
