@@ -1,15 +1,14 @@
 ---
-title: "Christmas Carol Service"
-date: "2025-12-25"
-location: "St. Mary's Chapel"
+title: "Volunteer Packing Day"
+date: "NOV 25, 2025"
+location: "Pennsburg, PA"
 category: "Community"
-excerpt: "Join us for a night of festive songs and community spirit."
-image: "https://res.cloudinary.com/dvexnl19a/image/upload/v1764050764/IMG_0979_kddbxw.jpg"
+excerpt: "Join us as we pack gift baskets and feel the spirit of giving."
+image: "https://res.cloudinary.com/dvexnl19a/image/upload/c_crop,ar_1:1/v1764802144/girl-decorating-a-christmas-tree-in-the-snow-528-smartphone-wallpaper_y81pgh.png"
 ---
 
-# Christmas Carol Service
+# Volunteer Packing Day
 
-Come and celebrate the festive season with us. There will be:
+Come and feel the true spirit of giving with us. There will be:
 * Hot chocolate and mince pies
-* Live choir performance
-* Readings from community leaders
+* Board games and more
