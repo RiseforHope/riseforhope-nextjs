@@ -24,7 +24,7 @@ export default function NewsEvents() {
                         <div className="section-label">News</div>
                         <div
                             className="featured-image-container"
-                            style={{ backgroundImage: "url('https://res.cloudinary.com/dvexnl19a/image/upload/v1764050764/IMG_0979_kddbxw.jpg')" }}
+                            style={{ backgroundImage: "url('https://res.cloudinary.com/dvexnl19a/image/upload/v1764800787/love-you-hand-gesturel_nz8ntk.png')" }}
                         >
                             <div className="notch-up"></div>
                         </div>
