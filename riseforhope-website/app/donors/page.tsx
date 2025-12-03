@@ -1,8 +1,14 @@
+'use client'; // Required for using useState
+
+import { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Link from 'next/link';
 
 export default function DonorsInfoPage() {
+    // State to handle the accordion open/close toggle
+    const [isDocsOpen, setIsDocsOpen] = useState(false);
+
     return (
         <main>
             <Header />
@@ -47,23 +53,92 @@ export default function DonorsInfoPage() {
                         </div>
                     </div>
 
-                    {/* PDF Link Section */}
+                    {/* NEW: Documents Accordion Section */}
                     <div style={{ borderTop: '1px solid #e5e5e5', paddingTop: '20px' }}>
-                        <a
-                            href="https://app.box.com/s/6p5qazs820pb37b58k4wctx0u0h6p7vw"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <button
+                            onClick={() => setIsDocsOpen(!isDocsOpen)}
                             style={{
-                                fontFamily: 'var(--font-sans)',
-                                color: '#1D1B1A',
-                                textDecoration: 'underline',
-                                fontWeight: '400',
-                                fontSize: '1rem',
-                                cursor: 'pointer'
+                                width: '100%',
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                background: 'none',
+                                border: 'none',
+                                cursor: 'pointer',
+                                padding: '10px 0',
+                                textAlign: 'left'
                             }}
                         >
-                            Download our IRS Letter (PDF)
-                        </a>
+                            <span style={{
+                                fontFamily: 'var(--font-sans)',
+                                color: '#1D1B1A',
+                                fontWeight: '600',
+                                fontSize: '1rem'
+                            }}>
+                                View Official Documents
+                            </span>
+                            {/* Simple SVG Chevron that rotates based on state */}
+                            <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                style={{
+                                    transform: isDocsOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                                    transition: 'transform 0.3s ease'
+                                }}
+                            >
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+
+                        {/* Collapsible Content */}
+                        {isDocsOpen && (
+                            <div style={{
+                                marginTop: '10px',
+                                paddingLeft: '10px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '10px'
+                            }}>
+                                <a
+                                    href="https://app.box.com/s/6p5qazs820pb37b58k4wctx0u0h6p7vw"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{
+                                        fontFamily: 'var(--font-sans)',
+                                        color: '#666',
+                                        textDecoration: 'underline',
+                                        fontSize: '0.95rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '8px'
+                                    }}
+                                >
+                                    📄 IRS Determination Letter (PDF)
+                                </a>
+
+                                {/* Placeholder for future documents */}
+                                <a
+                                    href="https://app.box.com/s/c0qqz9hx7ux8hempx30gpjg41hflq9g7"
+                                    style={{
+                                        fontFamily: 'var(--font-sans)',
+                                        color: '#999',
+                                        textDecoration: 'underline',
+                                        fontSize: '0.95rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '8px',
+                                    }}
+                                >
+                                    📄 2025 Governance & Transparency (PDF)
+                                </a>
+                            </div>
+                        )}
                     </div>
                 </div>
 
