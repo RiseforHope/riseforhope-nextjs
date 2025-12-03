@@ -31,7 +31,7 @@ export default function EventsIndex() {
                                 <div style={{
                                     width: '100%',
                                     height: '200px',
-                                    backgroundImage: `url('${event.image || "https://res.cloudinary.com/dvexnl19a/image/upload/v1764050764/IMG_0979_kddbxw.jpg"}')`,
+                                    backgroundImage: `url('${event.image || "https://res.cloudinary.com/dvexnl19a/image/upload/v1764800787/love-you-hand-gesturel_nz8ntk.png"}')`,
                                     backgroundSize: 'cover',
                                     backgroundPosition: 'center'
                                 }}></div>

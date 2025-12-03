@@ -127,7 +127,7 @@ export default function DonorsInfoPage() {
                                     href="https://app.box.com/s/c0qqz9hx7ux8hempx30gpjg41hflq9g7"
                                     style={{
                                         fontFamily: 'var(--font-sans)',
-                                        color: '#999',
+                                        color: '#666',
                                         textDecoration: 'underline',
                                         fontSize: '0.95rem',
                                         display: 'flex',
