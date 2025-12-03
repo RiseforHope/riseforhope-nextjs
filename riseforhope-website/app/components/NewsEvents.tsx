@@ -3,15 +3,15 @@ import Link from 'next/link';
 
 export default function NewsEvents() {
     const news = [
-        { id: 1, date: 'OCT 24, 2025', title: 'New Partnership Announced with Children\'s Hospital', link: '/blog/partnership' },
-        { id: 2, date: 'NOV 01, 2025', title: 'Volunteer Spotlight: Sarah\'s Story', link: '/blog/volunteer' },
-        { id: 3, date: 'NOV 15, 2025', title: 'End of Year Fundraising Goal Set', link: '/blog/fundraising' },
+        { id: 1, date: 'NOV 26, 2025', title: 'Hope Delivered: Donations Reached Families This Week', link: '/blog/partnership' },
+        { id: 2, date: 'NOV 19, 2025', title: 'Assembly Day: Thanksgiving Baskets Packed with Care', link: '/blog/volunteer' },
+        { id: 3, date: 'OCT 5, 2025', title: 'The Thanksgiving Fundraiser Begins', link: '/blog/fundraising' },
+        { id: 3, date: 'JULY 16, 2025', title: 'In the Community: Local Newspaper Shares Rise for Hope', link: '/blog/fundraising' },
     ];
 
     const events = [
-        { id: 1, date: 'DEC 05, 2025', title: 'Annual Holiday Gala & Auction', location: 'Grand Ballroom, NY', link: '/events' },
-        { id: 2, date: 'JAN 12, 2026', title: 'Community Fun Run for Hope', location: 'Central Park', link: '/events' },
-        { id: 3, date: 'FEB 14, 2026', title: 'Valentine\'s Day Virtual Concert', location: 'Online Event', link: '/events' },
+        { id: 1, date: 'NOV 25, 2025', title: 'Volunteer Packing Day: Christmas Support Drive', location: 'Pennsburg, PA', link: '/events' },
+        { id: 2, date: 'JULY 6, 2026', title: 'Community Fundraiser (Small Event, Real Impact)', location: 'East Greenville, PA', link: '/events' },
     ];
 
     return (
