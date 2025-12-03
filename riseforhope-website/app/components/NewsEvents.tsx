@@ -6,7 +6,7 @@ export default function NewsEvents() {
         { id: 1, date: 'NOV 26, 2025', title: 'Hope Delivered: Donations Reached Families This Week', link: '/blog/partnership' },
         { id: 2, date: 'NOV 19, 2025', title: 'Assembly Day: Thanksgiving Baskets Packed with Care', link: '/blog/volunteer' },
         { id: 3, date: 'OCT 5, 2025', title: 'The Thanksgiving Fundraiser Begins', link: '/blog/fundraising' },
-        { id: 3, date: 'JULY 16, 2025', title: 'In the Community: Local Newspaper Shares Rise for Hope', link: '/blog/fundraising' },
+        { id: 4, date: 'JULY 16, 2025', title: 'In the Community: Local Newspaper Shares Rise for Hope', link: '/blog/fundraising' },
     ];
 
     const events = [
@@ -30,7 +30,8 @@ export default function NewsEvents() {
                         </div>
 
                         <div className="ne-list">
-                            {news.map((item) => (
+                            {/* slice(0, 2) limits this to the first 2 items */}
+                            {news.slice(0, 2).map((item) => (
                                 <Link href={item.link} key={item.id} className="news-list-item" style={{ display: 'block', textDecoration: 'none' }}>
                                     <span className="item-date">{item.date}</span>
                                     <h3 className="item-headline">{item.title}</h3>
@@ -53,7 +54,8 @@ export default function NewsEvents() {
                         </div>
 
                         <div className="ne-list">
-                            {events.map((item) => (
+                            {/* slice(0, 2) limits this to the first 2 items */}
+                            {events.slice(0, 2).map((item) => (
                                 <Link href={item.link} key={item.id} className="events-list-item" style={{ display: 'block', textDecoration: 'none' }}>
                                     <div>
                                         <span className="item-date">{item.date}</span>
