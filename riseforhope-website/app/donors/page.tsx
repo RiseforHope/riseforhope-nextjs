@@ -159,7 +159,7 @@ export default function DonorsInfoPage() {
                                     </a>
 
                                     <a
-                                        href="https://app.box.com/s/c0qqz9hx7ux8hempx30gpjg41hflq9g7"
+                                        href="https://app.box.com/s/os4qpq88ect7xf7u2so6o1h17i2f3pbv"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         style={{
@@ -191,7 +191,7 @@ export default function DonorsInfoPage() {
                 <div style={{ marginTop: '40px', borderTop: '1px solid #eee', paddingTop: '40px' }}>
                     <h4 style={{ fontFamily: 'var(--font-sans)', fontWeight: 'bold', marginBottom: '10px' }}>Need tax receipts?</h4>
                     <p className="mission-text" style={{ fontSize: '1rem' }}>
-                        For questions regarding annual tax receipts or large-scale endowments, please contact our finance team at <a href="mailto:finance@riseforhope.org" style={{ color: '#D4AF37', textDecoration: 'underline' }}>finance@riseforhope.org</a>.
+                        For questions regarding annual tax receipts or large-scale endowments, please contact our finance team at <a href="mailto:finance@riseforhope.org" style={{ color: '#4285f4', textDecoration: 'underline' }}>finance@riseforhope.org</a>.
                     </p>
                 </div>
 
