@@ -1,54 +1,68 @@
-'use client'; // Required for using useState
+import React, { useState } from 'react';
 
-import { useState } from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Link from 'next/link';
+// --- PLACEHOLDERS FOR PREVIEW ---
+// (In your actual Next.js project, keep your original imports)
+const Header = () => (
+    <div style={{ padding: '20px', borderBottom: '1px solid #eee', textAlign: 'center', fontFamily: 'sans-serif' }}>
+        <strong>Rise for Hope</strong> Header
+    </div>
+);
+const Footer = () => (
+    <div style={{ padding: '20px', borderTop: '1px solid #eee', textAlign: 'center', fontFamily: 'sans-serif', marginTop: '40px' }}>
+        Rise for Hope © 2025
+    </div>
+);
+// Mocking Next.js Link for this preview
+const Link = ({ href, children, ...props }) => (
+    <a href={href} {...props} style={{ textDecoration: 'none', color: 'inherit', ...props.style }}>
+        {children}
+    </a>
+);
 
 export default function DonorsInfoPage() {
     // State to handle the accordion open/close toggle
     const [isDocsOpen, setIsDocsOpen] = useState(false);
 
     return (
-        <main>
+        <main style={{ fontFamily: 'sans-serif', color: '#1D1B1A' }}>
             <Header />
 
-            <div className="max-w-container" style={{ padding: '150px 20px', minHeight: '80vh', maxWidth: '800px' }}>
+            <div className="max-w-container" style={{ padding: '150px 20px', minHeight: '80vh', maxWidth: '800px', margin: '0 auto' }}>
 
                 {/* Back Link */}
-                <Link href="/" className="item-date" style={{ marginBottom: '20px', display: 'inline-block' }}>
+                <Link href="#" className="item-date" style={{ marginBottom: '20px', display: 'inline-block', color: '#666', cursor: 'pointer' }}>
                     ← Back to Home
                 </Link>
 
-                <h1 className="mission-title" style={{ fontSize: '3rem', marginBottom: '20px' }}>
+                <h1 className="mission-title" style={{ fontSize: '3rem', marginBottom: '20px', lineHeight: '1.1' }}>
                     Information for Donors
                 </h1>
 
-                <p className="mission-text" style={{ fontSize: '1.2rem', color: '#666', marginBottom: '60px' }}>
+                <p className="mission-text" style={{ fontSize: '1.2rem', color: '#666', marginBottom: '60px', lineHeight: '1.6' }}>
                     Transparency is at the heart of our organization. Here you will find our official registration details and financial commitments.
                 </p>
 
                 {/* OFFICIAL DETAILS CARD */}
                 <div style={{ background: '#f9f9f9', padding: '40px', borderRadius: '20px', marginBottom: '40px' }}>
-                    <h3 style={{ fontFamily: 'var(--font-sans)', fontSize: '1.5rem', marginBottom: '20px', fontWeight: 'bold' }}>
+                    <h3 style={{ fontSize: '1.5rem', marginBottom: '20px', fontWeight: 'bold' }}>
                         Organization Details
                     </h3>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', fontFamily: 'var(--font-sans)', marginBottom: '30px' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '30px' }}>
                         <div>
-                            <strong style={{ display: 'block', color: '#888', fontSize: '0.9rem' }}>Official Name</strong>
+                            <strong style={{ display: 'block', color: '#888', fontSize: '0.9rem', marginBottom: '4px' }}>Official Name</strong>
                             <span style={{ fontSize: '1.1rem' }}>Rise for Hope</span>
                         </div>
                         <div>
-                            <strong style={{ display: 'block', color: '#888', fontSize: '0.9rem' }}>Registered Charity No.</strong>
+                            <strong style={{ display: 'block', color: '#888', fontSize: '0.9rem', marginBottom: '4px' }}>Registered Charity No.</strong>
                             <span style={{ fontSize: '1.1rem' }}>EIN: 33-4151218</span>
                         </div>
                         <div>
-                            <strong style={{ display: 'block', color: '#888', fontSize: '0.9rem' }}>Tax Status</strong>
+                            <strong style={{ display: 'block', color: '#888', fontSize: '0.9rem', marginBottom: '4px' }}>Tax Status</strong>
                             <span style={{ fontSize: '1.1rem' }}>501(c)(3) Non-Profit</span>
                         </div>
                         <div>
-                            <strong style={{ display: 'block', color: '#888', fontSize: '0.9rem' }}>Headquarters</strong>
+                            <strong style={{ display: 'block', color: '#888', fontSize: '0.9rem', marginBottom: '4px' }}>Headquarters</strong>
                             <span style={{ fontSize: '1.1rem' }}>East Greenville, PA</span>
                         </div>
                     </div>
@@ -66,11 +80,13 @@ export default function DonorsInfoPage() {
                                 border: 'none',
                                 cursor: 'pointer',
                                 padding: '10px 0',
-                                textAlign: 'left'
+                                textAlign: 'left',
+                                // FIX: Removes the gray flash on tap (mobile) and focus outline
+                                WebkitTapHighlightColor: 'transparent',
+                                outline: 'none'
                             }}
                         >
                             <span style={{
-                                fontFamily: 'var(--font-sans)',
                                 color: '#1D1B1A',
                                 fontWeight: '600',
                                 fontSize: '1rem'
@@ -112,11 +128,10 @@ export default function DonorsInfoPage() {
                                     paddingBottom: '10px'
                                 }}>
                                     <a
-                                        href="https://app.box.com/s/6p5qazs820pb37b58k4wctx0u0h6p7vw"
+                                        href="#"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         style={{
-                                            fontFamily: 'var(--font-sans)',
                                             color: '#666',
                                             textDecoration: 'underline',
                                             fontSize: '0.95rem',
@@ -129,11 +144,10 @@ export default function DonorsInfoPage() {
                                     </a>
 
                                     <a
-                                        href="https://app.box.com/s/c0qqz9hx7ux8hempx30gpjg41hflq9g7"
+                                        href="#"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         style={{
-                                            fontFamily: 'var(--font-sans)',
                                             color: '#666',
                                             textDecoration: 'underline',
                                             fontSize: '0.95rem',
@@ -151,17 +165,17 @@ export default function DonorsInfoPage() {
                 </div>
 
                 {/* FINANCIAL COMMITMENT */}
-                <h3 className="mission-title" style={{ fontSize: '1.8rem', marginTop: '60px' }}>Our Financial Promise</h3>
-                <p className="mission-text">
+                <h3 className="mission-title" style={{ fontSize: '1.8rem', marginTop: '60px', marginBottom: '20px', fontWeight: 'bold' }}>Our Financial Promise</h3>
+                <p className="mission-text" style={{ lineHeight: '1.6' }}>
                     We are committed to ensuring that your donation makes the maximum impact.
                     <strong> 100% of public donations</strong> go directly to supporting families and funding critical research.
                     Our administrative costs are covered entirely by private benefactors.
                 </p>
 
                 <div style={{ marginTop: '40px', borderTop: '1px solid #eee', paddingTop: '40px' }}>
-                    <h4 style={{ fontFamily: 'var(--font-sans)', fontWeight: 'bold', marginBottom: '10px' }}>Need tax receipts?</h4>
-                    <p className="mission-text" style={{ fontSize: '1rem' }}>
-                        For questions regarding annual tax receipts or large-scale endowments, please contact our finance team at <a href="mailto:finance@riseforhope.org" style={{ color: 'var(--col-gold)', textDecoration: 'underline' }}>finance@riseforhope.org</a>.
+                    <h4 style={{ fontWeight: 'bold', marginBottom: '10px' }}>Need tax receipts?</h4>
+                    <p className="mission-text" style={{ fontSize: '1rem', lineHeight: '1.6' }}>
+                        For questions regarding annual tax receipts or large-scale endowments, please contact our finance team at <a href="mailto:finance@riseforhope.org" style={{ color: '#D4AF37', textDecoration: 'underline' }}>finance@riseforhope.org</a>.
                     </p>
                 </div>
 
