@@ -45,7 +45,7 @@ export default function BlogIndex() {
                                 <p className="item-excerpt">{post.excerpt}</p>
 
                                 <Link href={`/blog/${post.slug}`} className="btn-yellow" style={{ marginTop: '20px' }}>
-                                    Read Article <span className="btn-yellow-arrow"></span>
+                                    Read the story <span className="btn-yellow-arrow"></span>
                                 </Link>
                             </div>
                         </div>

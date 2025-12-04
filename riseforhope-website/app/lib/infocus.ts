@@ -54,7 +54,7 @@ export function getInFocusBySlug(slug: string): InFocusPost | null {
     return {
         slug,
         title: data.title,
-        buttonText: data.buttonText || 'Read More',
+        buttonText: data.buttonText || 'Read the story',
         excerpt: data.excerpt,
         image: data.image,
         imageCaption: data.imageCaption || null,
