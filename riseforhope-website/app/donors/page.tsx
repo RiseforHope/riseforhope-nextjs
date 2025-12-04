@@ -1,36 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-
-// =====================================================================
-// ⚠️ INSTRUCTIONS FOR YOUR PROJECT:
-// 1. DELETE the "MOCK COMPONENTS" section below.
-// 2. UNCOMMENT the actual imports below that.
-// =====================================================================
-
-// --- MOCK COMPONENTS (Typed for TypeScript) ---
-const Header = () => <div className="p-4 border-b text-center font-bold">Header Placeholder</div>;
-const Footer = () => <div className="p-4 border-t text-center mt-10">Footer Placeholder</div>;
-
-interface MockLinkProps {
-    href: string;
-    children: React.ReactNode;
-    className?: string;
-    style?: React.CSSProperties;
-}
-
-const Link = ({ href, children, style, className }: MockLinkProps) => (
-    <a href={href} className={className} style={{ textDecoration: 'none', color: 'inherit', ...style }}>
-        {children}
-    </a>
-);
-// ---------------------------------------------------------------------
-
-/* --- UNCOMMENT THESE IN YOUR ACTUAL PROJECT ---
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Link from 'next/link';
-*/
+
 
 export default function DonorsInfoPage() {
     // State to handle the accordion open/close toggle
