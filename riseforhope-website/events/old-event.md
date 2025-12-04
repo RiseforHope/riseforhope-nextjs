@@ -1,5 +1,5 @@
 ---
-title: "Volunteer Packing Day"
+title: "Community Day"
 date: "NOV 25, 2025"
 location: "Pennsburg, PA"
 category: "Community"
