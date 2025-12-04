@@ -83,7 +83,7 @@ export default function DonorsInfoPage() {
                                 height="24"
                                 viewBox="0 0 24 24"
                                 fill="none"
-                                stroke="currentColor"
+                                stroke="#000000"
                                 strokeWidth="2"
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
@@ -96,49 +96,57 @@ export default function DonorsInfoPage() {
                             </svg>
                         </button>
 
-                        {/* Collapsible Content */}
-                        {isDocsOpen && (
-                            <div style={{
-                                marginTop: '10px',
-                                paddingLeft: '10px',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                gap: '10px'
-                            }}>
-                                <a
-                                    href="https://app.box.com/s/6p5qazs820pb37b58k4wctx0u0h6p7vw"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    style={{
-                                        fontFamily: 'var(--font-sans)',
-                                        color: '#666',
-                                        textDecoration: 'underline',
-                                        fontSize: '0.95rem',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: '8px'
-                                    }}
-                                >
-                                    📄 IRS Determination Letter (PDF)
-                                </a>
+                        {/* Collapsible Content with Smooth Animation */}
+                        <div style={{
+                            display: 'grid',
+                            gridTemplateRows: isDocsOpen ? '1fr' : '0fr',
+                            transition: 'grid-template-rows 0.3s ease-out'
+                        }}>
+                            <div style={{ overflow: 'hidden' }}>
+                                <div style={{
+                                    marginTop: '10px',
+                                    paddingLeft: '10px',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    gap: '10px',
+                                    paddingBottom: '10px'
+                                }}>
+                                    <a
+                                        href="https://app.box.com/s/6p5qazs820pb37b58k4wctx0u0h6p7vw"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        style={{
+                                            fontFamily: 'var(--font-sans)',
+                                            color: '#666',
+                                            textDecoration: 'underline',
+                                            fontSize: '0.95rem',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '8px'
+                                        }}
+                                    >
+                                        📄 IRS Determination Letter (PDF)
+                                    </a>
 
-                                {/* Placeholder for future documents */}
-                                <a
-                                    href="https://app.box.com/s/c0qqz9hx7ux8hempx30gpjg41hflq9g7"
-                                    style={{
-                                        fontFamily: 'var(--font-sans)',
-                                        color: '#666',
-                                        textDecoration: 'underline',
-                                        fontSize: '0.95rem',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: '8px',
-                                    }}
-                                >
-                                    📄 2025 Governance & Transparency (PDF)
-                                </a>
+                                    <a
+                                        href="https://app.box.com/s/c0qqz9hx7ux8hempx30gpjg41hflq9g7"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        style={{
+                                            fontFamily: 'var(--font-sans)',
+                                            color: '#666',
+                                            textDecoration: 'underline',
+                                            fontSize: '0.95rem',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '8px',
+                                        }}
+                                    >
+                                        📄 2025 Governance & Transparency (PDF)
+                                    </a>
+                                </div>
                             </div>
-                        )}
+                        </div>
                     </div>
                 </div>
 
